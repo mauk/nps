@@ -1,0 +1,10 @@
+"intUpdateID","datDate","memRemark","intBandID","intAgentID"
+3,7/10/2002,"hello",3,13
+4,7/10/2002,"whatever",3,13
+5,7/25/2002,"Works at another office - Tel: 55505555. Left message there for him to call me back.",5,13
+6,7/25/2002,"Chief requested I fax him a copy of fact sheet for their meeting tomorrow - this property is on their agenda for discussion.  He will call me at the end of the day with advice.",5,13
+7,7/25/2002,"Letter received from Doug Aberley, Tsleil-Waututh Nation advising they have no interest in acquiring this property.",5,13
+8,7/25/2002,"Chief doesn't work in office - comes in to pick up messages, left message to call me back.",6,13
+9,7/25/2002,"Director, Treaty Process called back in response to my message.  She asked me to fax her a copy of the July 20/ 987 letter, which I did.  Rec'd a fax back from Leona Sparrow",6,13
+10,7/25/2002,"Rec'd Fax. Apparently some confusion on a map sent to their office.",6,13
+11,7/25/2002,"Rec'd a letter from Musquam.",6,13

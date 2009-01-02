@@ -1,0 +1,2633 @@
+<html>
+<head>
+<title>NPS Documentation: Interface</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<p>Interface | <a href="database.html">Database</a></p>
+<p><font size="5"><b><a name="interface"></a>Interface</b></font></p>
+<p>
+<a href="interface.html#overview">System Overview</a><br>
+<a href="interface.html#systemFlow">System Flow Chart</a><br>
+<a href="interface.html#fileDescriptions">Directory Structure and File Descriptions</a><br>
+<a href="interface.html#variables">Global Variables</a><br>
+<a href="interface.html#security">Security Setup and User Access</a><br>
+<a href="interface.html#enhancements">Future Enhancements</a><br>
+<a href="interface.html#maintenance">Maintenance Procedures</a><br></p>
+<hr><br>
+
+<table border="0" cellpadding="0" cellspacing="0" width="730">
+<tr>
+<td width="30"><img src="transparent.gif" width="30" height="1"></td>
+<td>
+<a name="overview"></a><p><b><font size="4">System Overview</font></b></p>
+      <p>NPS is developed in Allaire ColdFusion with Microsoft Access 2000 as 
+        the database engine. It is a project management system for REAS acquisition, 
+        disposal and consulting projects. The primary users are REAS advisors 
+        who input and maintain the data for their own projects. The system is 
+        also used by management to gain an overview of current and completed projects 
+        as well as finding information about specific projects.</p>
+      <p>In order to ensure that the system is useful for the advisors, NPS 
+        has been designed to be simple and intuitive. It was decided that a web 
+        application would provide the most familiar interface and would be the 
+        most widely accessible. It was also important to ensure that using the 
+        system would not be a burden to the advisors, so the amount of data maintained 
+        about each project has been kept to a minimum.</p>
+      <p>To give management an overview of the current and completed projects, 
+        the system includes a basic reporting function. The user can search for 
+        projects using several different criteria and produce summary reports 
+        based on the results.</p>
+      <p>There is also a separate administration section where users with the 
+        appropriate access level can maintain the data that appears in many of 
+        the drop-down lists. Admin users can also download data from the database 
+        tables in ASCII format.</p>
+<p>
+<a href="interface.html#overviewLogin">Login/Logout</a><br>
+<a href="interface.html#overviewSearch">Search and Sort</a><br>
+<a href="interface.html#overviewDisplay">Project Display and Edit</a><br>
+<a href="interface.html#overviewPrint">Print</a><br>
+<a href="interface.html#overviewAdmin">Admin</a><br>
+</p>
+      <ul>
+        <li> <b><a name="overviewLogin"></a>Login/Logout</b><br>
+          <br>
+          In order for a user to add or edit any data they must be logged in. 
+          Only users with the "read/write" or "admin" access levels can log in. 
+          To log in, the user simply clicks on "Menu" and then "Login". Once at 
+          the <a href="interface.html#login">Login page</a> the user simply has 
+          to select their name from a list and enter the password and they will 
+          be returned to the <a href="interface.html#projectSearch">Project Search</a> 
+          page.<br>
+          <br>
+          To log out, the use clicks on "Menu" and then "Logout". The "Logout" 
+          option is not available when the user is viewing or editing a project. 
+          When the user clicks on "Logout" they will be returned to the <a href="interface.html#projectSearch">Project 
+          Search</a> page.<br>
+          <br>
+        </li>
+        <li> <b><a name="overviewSearch"></a>Search and Sort</b><br>
+          <br>
+          The <a href="interface.html#projectSearch">Project Search</a> page is 
+          the first page the user sees when they access the system. It allows 
+          the user to filter projects by project status, type, location, description, 
+          advisor, client, project number, file number, and client contact. If 
+          the user is logged in, their name will automatically be selected in 
+          the &quot;Advisor&quot; drop-down list. Also, only items which actually 
+          exist as data for at least one project will be available in the list-boxes 
+          (i.e. if there are no projects with Vancouver as the location, Vancouver 
+          will not be displayed in the &quot;Location&quot; drop-down list). When 
+          they have selected their criteria from the drop-down lists and/or entered 
+          their criteria in the text boxes, they click &quot;Submit&quot; to display 
+          the results on the <a href="interface.html#projectList">Search Results</a> 
+          page.<br>
+          <br>
+          To sort the results the user can click on the column headings on the 
+          <a href="interface.html#projectList">Search Results</a> page. If they 
+          want to sort by two fields they can click on a second column which becomes 
+          the primary sort, and the first column becomes the secondary sort.<br>
+          <br>
+        </li>
+        <li> <b><a name="overviewDisplay"></a>Project Display and Edit</b><br>
+          <br>
+          Projects fall into one of three categories: acquisitions, disposals 
+          and consulting projects. When the user wants to update a project, they 
+          perform a simple search (see <a href="interface.html#overviewSearch">above</a>) 
+          and click on the &quot;Details&quot; button for the project of their 
+          choice. Depending on the type of the selected project, this will take 
+          them to the appropriate project page (either <a href="interface.html#acquisitions">acquisitions.cfm</a>, 
+          <a href="interface.html#disposals">disposals.cfm</a>, or <a href="interface.html#consulting">consulting.cfm</a>) 
+          in which they can flip through the tabs and add to, or edit, the project's 
+          data. When they are done they can either click on &quot;Save&quot; or 
+          &quot;Cancel&quot; to return to the search results and select another 
+          project. If the user is not logged in, only the &quot;Cancel&quot; button 
+          will be available and they will not be able to save any changes.<br>
+          <br>
+          There are two types of data and, thus, two types of data entry. There 
+          is some data that a project only has one of. For example, a project 
+          only has one description and one location. This type of data is simply 
+          entered into text boxes or selected from drop-down lists. The other 
+          type of data is data that a project can have many of. For example, a 
+          project can have many status updates and many appraisals. This second 
+          type of data requires the user to click on an add or edit button which 
+          will take them to another page. On this secondary page, they will enter 
+          the data into text boxes and drop-down lists and then click submit to 
+          add the new data or edit already existing data.<br>
+          <br>
+        </li>
+        <li> <b><a name="overviewPrint"></a>Print</b><br>
+          <br>
+          There are two types of information that can be printed: information 
+          concerning a particular project, and information concerning many projects. 
+          To print information concerning a particular project, the user must 
+          go to that project by performing a search (see <a href="interface.html#overviewSearch">above</a>) 
+          and clicking on the &quot;Details&quot; button for that project (see 
+          <a href="interface.html#overviewDisplay">above</a>). Once at the project, 
+          the user clicks on &quot;Print&quot; to see a list of the available 
+          reports that can be printed. This list will vary, depending on the project 
+          type, as follows:<br>
+          <br>
+          <table border="0" cellpadding="0" cellspacing="0">
+            <tr> 
+              <td width="80">&nbsp;</td>
+              <td width="100">Acquisition</td>
+              <td width="175"><a href="interface.html#statusPrint">Status Journal</a></td>
+            </tr>
+            <tr> 
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td><a href="interface.html#acquisitionSummaryPrint">Acquisition 
+                Summary</a></td>
+            </tr>
+            <tr> 
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr> 
+              <td>&nbsp;</td>
+              <td>Disposal</td>
+              <td><a href="interface.html#statusPrint">Status Journal</a></td>
+            </tr>
+            <tr> 
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td><a href="interface.html#disposalSummaryPrint">Disposal Summary</a></td>
+            </tr>
+            <tr> 
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td><a href="interface.html#factSheet">Fact Sheet</a></td>
+            </tr>
+            <tr> 
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td><a href="interface.html#firstNationsPrint">First Nations Consultations</a></td>
+            </tr>
+            <tr> 
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr> 
+              <td>&nbsp;</td>
+              <td>Consulting</td>
+              <td><a href="interface.html#statusPrint">Status Journal</a></td>
+            </tr>
+          </table>
+          <br>
+          To print information about many projects, the user must create the list 
+          of projects they want to include in the report by using the <a href="interface.html#projectSearch">Project 
+          Search</a> and selecting the appropriate criteria (see <a href="interface.html#overviewSearch">above</a>). 
+          Then the user must click on &quot;Print&quot; and click on the report 
+          of their choice. The three reports that are available are &quot;SCH 
+          Report&quot;, &quot;General Report&quot; and &quot;Project Summary&quot;. 
+          By clicking on &quot;SCH Report&quot; or &quot;General Report&quot;, 
+          the user is taken to another page (<a href="interface.html#SCHReportCreate">SCHReportCreate.cfm</a> 
+          or <a href="interface.html#generalReportCreate">generalReportCreate.cfm</a>) 
+          where they can choose the sort and enter other data that will appear 
+          on the report. The user must then click on &quot;Submit&quot; to create 
+          the report which can be printed from the browser. If the user chooses 
+          the &quot;Project Summary&quot; report (<a href="interface.html#projectSummaryReport">projectSummaryReport.cfm</a>), 
+          the report is immediately created and can be printed from the browser. 
+          For this report the projects are sorted in the same order as the Search 
+          Results.<br>
+          <br>
+        </li>
+        <li> <b><a name="overviewAdmin"></a>Admin</b><br>
+          <br>
+          The Admin section is where users can add, remove and edit items in the 
+          drop-down lists that appear in the project pages. To access the Admin 
+          section, users must be logged in and then click on &quot;Admin&quot; 
+          at the top of every page. Users with both read/write and administrative 
+          access can edit the &quot;Location&quot;, &quot;Client/Department&quot; 
+          and &quot;Client Contact&quot; lists, as well as change their passwords 
+          and download data from the database in ASCII text format. In addition 
+          to this, users with administrative access can also edit the &quot;Advisors&quot;, 
+          &quot;Property Types&quot;, &quot;Interest Sold Types&quot;, &quot;Disposal 
+          Methods&quot;, and &quot;Purchaser Types&quot; lists. Admin users can 
+          also delete projects from the system, provided the project does not 
+          have any First Nations Consultation data.<br>
+          <br>
+        </li>
+      </ul>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#interface">Top of Interface</a></p><br>
+</td>
+</tr>
+</table>
+<hr>
+<br>
+<table border="0" cellpadding="0" cellspacing="0" width="730">
+<tr>
+<td width="30">&nbsp;</td>
+<td>
+	<a name="systemFlow"></a><p><b><font size="4">System Flow Chart</font></b></p>
+	<img name="systemFlow" src="systemFlow.gif" width="700" height="900" border="0" usemap="#m_systemFlow">
+	<map name="m_systemFlow">
+	<area shape="rect" coords="445,55,555,75" href="interface.html#login" >
+	<area shape="rect" coords="14,68,124,88" href="interface.html#addOptions" >
+	<area shape="rect" coords="347,742,457,762" href="interface.html#statusPrint" >
+	<area shape="rect" coords="346,586,456,606" href="interface.html#statusPrint" >
+	<area shape="rect" coords="346,683,456,703" href="interface.html#statusUpdate" >
+	<area shape="rect" coords="346,532,456,552" href="interface.html#statusUpdate" >
+	<area shape="rect" coords="346,634,476,654" href="interface.html#firstNationsPrint" >
+	<area shape="rect" coords="346,610,456,630" href="interface.html#factSheet" >
+	<area shape="rect" coords="515,556,677,576" href="interface.html#disposalSummaryPrint" >
+	<area shape="rect" coords="346,556,491,576" href="interface.html#disposalSummary" >
+	<area shape="rect" coords="346,484,476,504" href="interface.html#addRemark" >
+	<area shape="rect" coords="346,459,476,480" href="interface.html#bandUpdate" >
+	<area shape="rect" coords="515,389,677,409" href="interface.html#acquisitionSummaryPrint" >
+	<area shape="rect" coords="346,419,456,439" href="interface.html#statusPrint" >
+	<area shape="rect" coords="346,389,491,409" href="interface.html#acquisitionSummary" >
+	<area shape="rect" coords="346,365,456,385" href="interface.html#statusUpdate" >
+	<area shape="rect" coords="346,508,456,528" href="interface.html#addPINPID" >
+	<area shape="rect" coords="346,341,456,361" href="interface.html#addPINPID" >
+	<area shape="rect" coords="346,317,476,337" href="interface.html#appraisalUpdate" >
+	<area shape="rect" coords="158,727,273,747" href="interface.html#consultingSave" >
+	<area shape="rect" coords="58,684,168,704" href="interface.html#consulting" >
+	<area shape="rect" coords="157,550,272,570" href="interface.html#disposalSave" >
+	<area shape="rect" coords="58,507,168,527" href="interface.html#disposals" >
+	<area shape="rect" coords="158,392,273,412" href="interface.html#acquisitionSave" >
+	<area shape="rect" coords="58,349,168,369" href="interface.html#acquisitions" >
+	<area shape="rect" coords="557,222,667,242" href="interface.html#generalReport" >
+	<area shape="rect" coords="557,190,667,210" href="interface.html#SCHReport" >
+	<area shape="rect" coords="373,222,533,242" href="interface.html#generalReportCreate" >
+	<area shape="rect" coords="373,190,533,210" href="interface.html#SCHReportCreate" >
+	<area shape="rect" coords="387,157,547,177" href="interface.html#projectSummaryReport" >
+	<area shape="rect" coords="122,111,262,130" href="interface.html#newProjectQuery" >
+	<area shape="rect" coords="148,68,258,88" href="interface.html#newProject" >
+	<area shape="rect" coords="299,99,409,119" href="interface.html#projectList" >
+	<area shape="rect" coords="299,55,409,75" href="interface.html#projectSearch" >
+	<area shape="rect" coords="299,11,409,31" href="interface.html#index" >
+	</map>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#interface">Top of Interface</a></p><br>
+</td>
+</tr>
+</table>
+<hr>
+<br>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="735">
+<tr>
+<td width="30"><img src="transparent.gif" width="30" height="1"></td>
+    <td width="705"> <a name="fileDescriptions"></a> 
+      <p><b><font size="4">Directory Structure and File Descriptions</font></b></p>
+      <b>NPS/</b> (Main directory) 
+      <table border="0" cellpadding="0" cellspacing="0" width="560">
+        <tr>
+		  <td width="30"><img src="transparent.gif" width="30" height="1"></td> 
+          <td width="250" valign="top"> <a href="interface.html#acquisitions">acquisitions.cfm</a><br>
+            <a href="interface.html#acquisitionSave">acquisitionSave.cfm</a><br>
+            <a href="interface.html#acquisitionSummary">acquisitionSummary.cfm</a><br>
+            <a href="interface.html#acquisitionSummaryPrint">acquisitionSummaryPrint.cfm</a><br>
+            <a href="interface.html#addOptions">addOptions.cfm</a><br>
+            <a href="interface.html#addPINPID">addPINPID.cfm</a><br>
+            <a href="interface.html#addRemark">addRemark.cfm</a><br>
+            <a href="interface.html#application">application.cfm</a><br>
+            <a href="interface.html#appraisalUpdate">appraisalUpdate.cfm</a><br>
+            <a href="interface.html#bandUpdate">bandUpdate.cfm</a><br>
+            <a href="interface.html#calendar">calendar.cfm</a><br>
+            <a href="interface.html#consulting">consulting.cfm</a><br>
+            <a href="interface.html#consultingSave">consultingSave.cfm</a><br>
+            <a href="interface.html#disposals">disposals.cfm</a><br>
+            <a href="interface.html#disposalSave">disposalSave.cfm</a><br>
+            <a href="interface.html#disposalSummary">disposalSummary.cfm</a><br>
+            <a href="interface.html#disposalSummaryPrint">disposalSummaryPrint.cfm</a><br>
+            <a href="interface.html#errorCurrency">errorCurrency.cfm</a>
+            
+          </td>
+          <td width="280" valign="top"> 
+		    <a href="interface.html#errorPINPID">errorPINPID.cfm</a><br>
+			<a href="interface.html#factSheet">factSheet.cfm</a><br> 
+            <a href="interface.html#firstNationsPrint">firstNationsPrint.cfm</a><br>
+            <a href="interface.html#generalReport">generalReport.cfm</a><br>
+            <a href="interface.html#generalReportCreate">generalReportCreate.cfm</a><br>
+            <a href="interface.html#header">header.cfm</a><br>
+            <a href="interface.html#help">help.html</a><br>
+            <a href="interface.html#index">index.cfm</a><br>
+            <a href="interface.html#login">login.cfm</a><br>
+            <a href="interface.html#newProject">newProject.cfm</a><br>
+            <a href="interface.html#newProjectQuery">newProjectQuery.cfm</a><br>
+            <a href="interface.html#projectList">projectList.cfm</a><br>
+            <a href="interface.html#projectSearch">projectSearch.cfm</a><br>
+            <a href="interface.html#projectSummaryReport">projectSummaryReport.cfm</a><br>
+            <a href="interface.html#SCHReport">SCHReport.cfm</a><br>
+            <a href="interface.html#SCHReportCreate">SCHReportCreate.cfm</a><br>
+            <a href="interface.html#statusPrint">statusPrint.cfm</a><br>
+            <a href="interface.html#statusUpdate">statusUpdate.cfm</a>
+          </td>
+        </tr>
+		<tr>
+		  <td width="30"><img src="transparent.gif" width="30" height="1"></td>
+		  <td colspan="2">
+		    <br><b>/admin/</b> (<a href="interface.html#admin">Administration Files</a>) 
+		  </td>
+		</tr>
+		<tr>
+		  <td width="30"><img src="transparent.gif" width="30" height="1"></td>
+		  <td colspan="2">
+		      <table border="0" cellpadding="0" cellspacing="0">
+				<tr> 
+				  <td width="30"><img src="transparent.gif" width="30" height="1"></td>
+				  <td width="250" valign="top"> 
+				    agentAdmin.cfm<br>
+					agentEdit.cfm<br>
+					asciiAcquisitions.cfm<br>
+					asciiConsulting.cfm<br>
+					asciiDisposals.cfm<br>
+					asciiDownload.cfm<br>
+					clientContactAdmin.cfm<br>
+					clientContactEdit.cfm<br>
+					deptAdmin.cfm<br>
+					deptEdit.cfm<br>
+					disposalMethodAdmin.cfm<br>
+					disposalMethodEdit.cfm<br>
+                  errorDuplicate.cfm<br>
+					errorReferentialIntegrity.cfm<br>
+					index.cfm<br>
+					interestSoldAdmin.cfm<br>
+					interestSoldEdite.cfm<br>
+					locationAdmin.cfm<br>
+					locationEdit.cfm<br>
+					nav.cfm<br>
+					passwordAdmin.cfm<br>
+					projectAdmin.cfm<br>
+					propertyTypeAdmin.cfm<br>
+					propertyTypeEdit.cfm<br>
+					purchaserTypeAdmin.cfm					
+				  </td>
+				  <td width="250" valign="top"> 
+				    purchaserTypeEdit.cfm<br>
+					style.css<br>
+					tblAccessLevel.cfm<br>
+					tblAcqSummary.cfm<br>
+					tblAcquisitions.cfm<br>
+					tblAgent.cfm<br>
+					tblAppraisals.cfm<br>
+					tblBand.cfm<br>
+					tblClientContact.cfm<br>
+					tblDept.cfm<br>
+					tblDisposalMethod.cfm<br>
+					tblDisposals.cfm<br>
+					tblDispSummary.cfm<br>
+					tblFactSheet.cfm<br>
+					tblFirstNationsRemarks.cfm<br>
+					tblInterestSold.cfm<br>
+					tblLocation.cfm<br>
+					tblPINPID.cfm<br>
+					tblProjects.cfm<br>
+					tblProjectType.cfm<br>
+					tblPropertyTyp.cfm<br>
+					tblProvince.cfm<br>
+					tblPurchaserType.cfm<br>
+					tblStatus.cfm
+				  </td>
+				</tr>
+				<tr>
+					<td width="30"><img src="transparent.gif" width="30" height="1"></td>
+					<td colspan="2"><br><b>/ascii/</b> (holds ascii text files created by admin pages)</td>
+				</tr>
+			  </table>
+		  </td>
+		</tr>
+		<tr>
+		  <td width="30"><img src="transparent.gif" width="30" height="1"></td>
+		  <td colspan="2">
+		    <br><b>/calendar/</b> (Graphics for pop-up calendar) <br>
+			<br><b>/Database/</b> (holds Projects.mdb) <br>
+			<br><b>/documentation/</b> (Documentation Files and graphics) <br>
+			<br>
+            <b>/images/</b> (All image files except for those in /calendar/ and 
+            /documentation/) <br>
+		  </td>
+		</tr>
+      </table>
+      
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#interface">Top of Interface</a></p>
+      <br>
+	  <br>
+      <p><b>Notation for the "QueryString Parameters and Form Fields" lists below:</b><br>
+        x, y - both x and y are included<br>
+        x | y - either x or y is included<br>
+        [x] - parameter(s) is optional<br>
+        x(&quot;X&quot;) - parameter x has value X</p>
+      <p>Example:<br>
+        URL.projectID, URL.view, [Form.appraisalAdd | Form.appraisalUpdate]</p>
+        
+      <p>Reads:<br>
+        URL.projectID <i>and</i> URL.view are both passed and either Form.appraisalAdd 
+        <i>or</i> Form.appraisalUpdate <i>may</i> be passed.</p>
+      <p>Note: Only parameters and fields on which critical decisions are based 
+        are listed.</p>
+      <br>
+      <a name="acquisitions"></a> 
+      <p><font size="4"><b>acquisitions.cfm</b></font></p>
+	  <img src="acquisitions.gif" width="700" height="525" border="0">
+      <p>acquisitions.cfm displays the project information for acquisition projects. 
+        When the user clicks on the &quot;Details&quot; button of an acquisition 
+        project from the Search Results, acquisition.cfm is called. It reads the 
+        Project ID from the querystring to determine which project should be displayed 
+        and then retrieves the data from <a href="database.html#tblAcquisitions">tblAcquisitions</a> 
+        and <a href="database.html#tblProjects">tblProjects</a> and fills in the 
+        fields with this data. acquisitions.cfm can be requested from many other 
+        files and depending on the parameters passed to it, it may perform various 
+        update and append queries. When acquisitions.cfm is requested by projectList.cfm 
+        or newProject.cfm it saves all of it's data in Session variables so that 
+        if the user clicks &quot;Cancel&quot; projectList.cfm can restore all 
+        the data to it's original state.</p>
+      <p><b>Files that can request acquisitions.cfm:</b></p>
+      
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitionSave">acquisitionSave.cfm</a></td>
+          <td>URL.projectID, URL.pinpidDelete | URL.appraisalDelete | URL.statusDelete</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>URL.projectID, URL.backup</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#newProjectQuery">newProjectQuery.cfm</a></td>
+          <td>URL.projectID, URL.backup</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitionSummary">acquisitionSummary.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#addPINPID">addPINPID.cfm</a></td>
+          <td>URL.projectID, URL.view, [Form.pinpidAdd]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#appraisalUpdate">appraisalUpdate.cfm</a></td>
+          <td>URL.projectID, URL.view, [Form.appraisalAdd | Form.appraisalUpdate]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#statusUpdate">statusUpdate.cfm</a></td>
+          <td>URL.projectID, URL.view, [Form.statusAdd | Form.statusUpdate]</td>
+        </tr>
+      </table>
+	  <br><br>
+	  <p><b>Files that acquisitions.cfm can request:</b></p>
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitionSave">acquisitionSave.cfm</a></td>
+          <td>Form.page(&quot;projectList.cfm&quot;) | <br>
+            Form.page(&quot;addPINPID.cfm?type=acquisitions&amp;projectID=<i>n</i>&quot;) 
+            |<br>
+            Form.page(&quot;acquisitions.cfm?projectID=<i>n</i>&amp;pinpidDelete=<i>n</i>&amp;view=property&quot;) 
+            | <br>
+            Form.page(&quot;appraisalUpdate.cfm?type=acquisitions&amp;projectID=<i>n</i>&amp;add=yes&quot;) 
+            |<br>
+            Form.page(&quot;appraisalUpdate.cfm?type=acquisitions&amp;projectID=<i>n</i>&amp;appraisalID=<i>n</i>&quot;) 
+            |<br>
+            Form.page(&quot;acquisitions.cfm?projectID=<i>n</i>&amp;appraisalDelete=<i>n</i>&amp;view=purchase&quot;) 
+            |<br>
+            Form.page(&quot;statusUpdate.cfm?type=acquisitions&amp;projectID=<i>n</i>&amp;add=yes&quot;) 
+            |<br>
+            Form.page(&quot;statusUpdate.cfm?type=acquisitions&amp;projectID=<i>n</i>&amp;statusID=<i>n</i>&quot;) 
+            |<br>
+            Form.page(&quot;acquisitions.cfm?projectID=<i>n</i>&amp;statusDelete=<i>n</i>&amp;view=status&quot;) 
+            | <br>
+            Form.page(&quot;statusPrint.cfm?projectID=<i>n</i>&quot;) | <br>
+            Form.page(&quot;acquisitionSummary.cfm?projectID=<i>n</i>&quot;)</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>URL.cancelType(&quot;acquisition&quot;)</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitionSummary">acquisitionSummary.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#statusPrint">statusPrint.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#calendar">calendar.cfm</a></td>
+          <td>URL.tab, URL.form, URL.field</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	  
+	  <a name="acquisitionSave"></a><p><font size="4"><b>acquisitionSave.cfm</b></font></p>
+	  <p>Whenever a user leaves <a href="interface.html#acquisitions">acquisitions.cfm</a> 
+        (with the exception of clicking &quot;Cancel&quot; or &quot;Admin&quot;) 
+        all of the data that is currently in the forms on acquisitons.cfm is sent 
+        to acquisitionSave.cfm, where it is saved to the database (<a href="database.html#tblAcquisitions">tblAcquisitions</a> 
+        and <a href="database.html#tblProjects">tblProjects</a>). acquisitionSave.cfm 
+        then sends the user to the appropriate page, as specified in Form.page.</p>
+      <p><b>Files that can request acquisitionSave.cfm:</b></p>
+      
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitions">acquisitions.cfm</a></td>
+          <td>Form.page</td>
+        </tr>
+      </table>
+	  <br><br>
+	  <p><b>Files that acquisitionSave.cfm can request:</b><br></p>
+	  <p>acquisitionSave.cfm can request any page that is passed to it (as a string) 
+        through Form.page. See <a href="interface.html#acquisitions">acquisitions.cfm</a> 
+        for a list of strings that can be passed to acquisitionSave.cfm.</p>
+	  <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p> 
+      
+	  <a name="acquisitionSummary"></a><p><font size="4"><b>acquisitionSummary.cfm</b></font></p>
+	  <img src="acquisitionSummary.gif" width="700" height="525" border="0"> 
+      <p>When the user wants to print the Summary of Property Acquisition (SPA), 
+        they are first taken to acquisitionSummary.cfm where they can use the 
+        form to edit the data that will actually be displayed. If the user has 
+        not yet clicked on &quot;Print Preview&quot; for this project then, when 
+        acquisitionSummary.cfm loads, the form will be filled with data from <a href="database.html#tblAcquisitions">tblAcquisitions</a> 
+        and <a href="database.html#tblProjects">tblProjects</a>. The when the user 
+        clicks on &quot;Print Preview&quot; the data in the form will be saved 
+        to <a href="database.html#tblAcqSummary">tblAcqSummary</a>. From that point 
+        forward, when the user goes to acquisitionSummary.cfm, the form will be 
+        filled with data from tblAcqSummary instead of tblAcquisitions and tblProjects.</p>
+      <p>If the user is logged in, then clicking on &quot;Acquisition Summary&quot; 
+        on the &quot;Print&quot; menu from <a href="interface.html#acquisitions">acquisitions.cfm</a> 
+        will request <a href="interface.html#acquisitionSave">acquisitionSave.cfm</a> 
+        which, in turn, will request acquisitionSummary.cfm. If the user is not 
+        logged in, they will be taken directly to acquisitionSummary.cfm to avoid 
+        saving changes they may have made.</p>
+      <p><b>Files that can request acquisitionSummary.cfm:</b></p>
+      
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#acquisitionSave">acquisitionSave.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitions">acquisitions.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+      </table>
+	  <br><br>
+	  <p><b>Files that acquisitionSummary.cfm can request:</b></p>
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#acquisitionSummaryPrint">acquisitionSummaryPrint.cfm</a></td>
+          <td>Form.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitions">acquisitions.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+      </table>
+	  <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+        
+	    <a name="acquisitionSummaryPrint"></a>
+      <p><font size="4"><b>acquisitionSummaryPrint.cfm</b></font></p>
+	  <img src="acquisitionSummaryPrint.gif" width="700" height="525" border="0">
+	  <p>acquisitionSummaryPrint.cfm displays data from <a href="database.html#tblAcqSummary">tblAcqSummary</a>, 
+        formatted as a Summary of Property Acquisition report.</p>
+      <p><b>Files that can request acquisitionSummaryPrint.cfm:</b></p>
+      
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitionSummary">acquisitionSummary.cfm</a></td>
+          <td>Form.projectID</td>
+        </tr>
+      </table>
+	  <br><br>
+	  <p><b>Files that acquisitionSummaryPrint.cfm can request:</b></p>
+	  <p>acquisitionSummaryPrint.cfm cannot request any pages, users must use 
+        the back button on their browser to return to acquisitionSummary.cfm</p>
+	  <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="addOptions"></a>
+      <p><font size="4"><b>addOptions.cfm</b></font></p>
+	  <img src="addOptions.gif" width="700" height="525" border="0">
+	  <p>When a user is adding a new project they have the option of adding new 
+        locations, client/departments and client contacts. When they click on 
+        a button to add one of these options, the form on <a href="interface.html#newProject">newProject.cfm</a> 
+        is sent to addOptions.cfm, where the values are entered into hidden form 
+        fields. Then when the user has filled out the form on addOptions.cfm, 
+        it (along with the hidden form fields) is sent back to newProject.cfm 
+        so that no data is lost.</p>
+      <p>When the user clicks on one of the &quot;Add Option&quot; buttons on 
+        newProject.cfm, the option type is passed to addOptions.cfm in Form.optionType. 
+        addOptions.cfm displays the appropriate form depending on the value in 
+        Form.optionType.</p>
+      <p><b>Files that can request addOptions.cfm:</b></p>
+      
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#newProject">newProject.cfm</a></td>
+          <td>Form.optionType</td>
+        </tr>
+      </table>
+	  <br><br>
+      <p><b>Files that addOptions.cfm can request:</b></p>
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#newProject">newProject.cfm</a></td>
+          <td>Form.optionType(&quot;location&quot;) | Form.optionType(&quot;dept&quot;) 
+            | <br>
+            Form.optionType(&quot;clientContact&quot;) | Form.optionType(&quot;cancel&quot;)</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="addPINPID"></a>
+      <p><font size="4"><b>addPINPID.cfm</b></font></p>
+	  <img src="addPINPID.gif" width="700" height="525" border="0">
+	  <p>Acquisition and disposal projects can both have many PIN/PID's. When 
+        they click on the &quot;Add New&quot; PIN/PID button on either <a href="interface.html#acquisitions">acquisitions.cfm</a> 
+        or <a href="interface.html#disposals">disposals.cfm</a>, they are taken 
+        to addPINPID.cfm (via acquisitionSave.cfm or disposalSave.cfm) where they 
+        fill out a simple form and click either &quot;Submit&quot; or &quot;Cancel&quot;. 
+        The form is sent to the page specified in URL.type (either acquisitions.cfm 
+        or dipsosals.cfm).</p>
+      <p><b>Files that can request addPINPID.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#acquisitionSave">acquisitionSave.cfm</a></td>
+          <td>URL.type(&quot;acquisitions&quot;), URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposalSave">disposalSave.cfm</a></td>
+          <td>URL.type(&quot;dispsoals&quot;), URL.projectID</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that addPINPID.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#acquisitions">acquisitions.cfm</a></td>
+          <td>URL.projectID, URL.view(&quot;property&quot;), [Form.pinpidAdd]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>URL.projectID, URL.view(&quot;property&quot;), [Form.pinpidAdd]</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="addRemark"></a>
+      <p><font size="4"><b>addRemark.cfm</b></font></p>
+	  <img src="addRemark.gif" width="700" height="525" border="0">
+	  <p>addRemark.cfm is called when a user clicks on "Add New Remark" on <a href="interface.html#disposals">disposals.cfm</a> 
+        in order to add a First Nations consultation remark. Remarks can only 
+        be added for bands that have already been added to the project. Unlike 
+        status updates and appraisals, First Nations consultation remarks cannot 
+        be edited once made.</p>
+      <p><b>Files that can request addRemark.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposalSave">disposalSave.cfm</a></td>
+          <td>URL.projectID, URL.bandID</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that addRemark.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>URL.projectID, URL.view(&quot;firstNations&quot;), [Form.remarkAdd]</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="application"></a>
+      <p><font size="4"><b>application.cfm</b></font></p>
+	  <p>application.cfm is automatically called every time a page is loaded. 
+        It is used for declaring variables with default values as well as turning 
+        on ClientManagement, ClientCookies, and SessionManagement.</p>
+      <p>&nbsp;</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="appraisalUpdate"></a>
+      <p><font size="4"><b>appraisalUpdate.cfm</b></font></p>
+	  <img src="appraisalUpdate.gif" width="700" height="525" border="0">
+	  <p>appraisalUpdate.cfm is called when the user clicks on the &quot;Add New&quot; 
+        or &quot;Edit&quot; buttons located in the Appraisal Info section on <a href="interface.html#acquisitions">acquisitions.cfm</a>. 
+        It checks the querystring parameters to see if the user is adding or editing 
+        an Appraisal. When the user fills out the form they can click &quot;Submit&quot; 
+        or &quot;Cancel&quot; to return to acquisitions.cfm where a query will 
+        add a new appraisal or edit an existing one.</p>
+      <p><b>Files that can request appraisalUpdate.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitionSave">acquisitionSave.cfm</a></td>
+          <td>URL.projectID, URL.add | URL.appraisalID, URL.type</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that appraisalUpdate.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#acquisitions">acquisitions.cfm</a></td>
+          <td>URL.projectID, URL.view(purchase), [Form.appraisalAdd | Form.appraisalUpdate]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#calendar">calendar.cfm</a></td>
+          <td>URL.form, URL.field</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="bandUpdate"></a>
+      <p><font size="4"><b>bandUpdate.cfm</b></font></p>
+	  <img src="bandUpdate.gif" width="700" height="525" border="0">
+	  <p>bandUpdate.cfm is called by <a href="interface.html#disposalSave">disposalSave.cfm</a> 
+        via <a href="interface.html#disposals">disposals.cfm</a> when a user clicks 
+        on &quot;Add New Band&quot; or &quot;Edit Band Info&quot;. If the user 
+        is editing a band, the form on bandUpdate.cfm will be filled with data 
+        from tblBand. Otherwise, the form will be blank. When the user is done 
+        they can click &quot;Submit&quot; or &quot;Cancel&quot; to return to disposals.cfm.</p>
+      <p><b>Files that can request bandUpdate.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposalSave">disposalSave.cfm</a></td>
+          <td>URL.projectID, URL.bandID | URL.add</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that bandUpdate.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>URL.projectID, URL.view(&quot;firstNations&quot;), [Form.bandAdd 
+            | Form.bandUpdate]</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="calendar"></a>
+      <p><font size="4"><b>calendar.cfm</b></font></p>
+	  <img src="calendar.gif" width="175" height="204" border="0">
+	  <p>calendar.cfm is called in a pop-up window, and allows the user to click 
+        on a date and have that date entered into a form field. The hyperlinks 
+        that request calendar.cfm pass it querystring parameters that tell it 
+        which field to put the date into. Today's date shows up in orange and 
+        when the mouse hovers over a day it changes to blue.</p>
+      <p><b>Files that can request calendar..cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top">calendar.cfm</td>
+          <td>[URL.tab], URL.form, URL.field, URL.date</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitions">acquisitions.cfm</a></td>
+          <td>URL.tab, URL.form, URL.field</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>URL.tab, URL.form, URL.field</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#statusUpdate">statusUpdate.cfm</a></td>
+          <td>URL.form, URL.field</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#appraisalUpdate">appraisalUpdate.cfm</a></td>
+          <td>URL.form, URL.field</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that calendar.cfm can request:</b><br></p>
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top">calendar.cfm</td>
+          <td>[URL.tab], URL.form, URL.field, URL.date</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="consulting"></a>
+      <p><font size="4"><b>consulting.cfm</b></font></p>
+	  <img src="consulting.gif" width="700" height="525" border="0"> 
+      <p>consulting.cfm displays the project information for consulting projects. 
+        When the user clicks on the &quot;Details&quot; button of a consulting 
+        project from the Search Results, consulting.cfm is called. It reads the 
+        Project ID from the querystring to determine which project should be displayed 
+        and then retrieves the data from <a href="database.html#tblConsulting">tblConsulting</a> 
+        and <a href="database.html#tblProjects">tblProjects</a> and fills in the 
+        fields with this data. Depending on the parameters passed to it, consulting.cfm 
+        may perform update or append queries as well. When consulting.cfm is requested 
+        by projectList.cfm or newProject.cfm it saves all of it's data in Session 
+        variables so that if the user clicks &quot;Cancel&quot; projectList.cfm 
+        can restore all the data to it's original state.</p>
+      <p><b>Files that can request consulting.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#consultingSave">consultingSave.cfm</a></td>
+          <td>URL.projectID, URL.statusDelete</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>URL.projectID, URL.backup</td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#newProjectQuery">newProjectQuery.cfm</a></td>
+          <td>URL.projectID, URL.backup</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#statusUpdate">statusUpdate.cfm</a></td>
+          <td>URL.projectID, URL.view, [Form.statusAdd | Form.statusUpdate]</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that consulting.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#consultingSave">consultingSave.cfm</a></td>
+          <td> 
+            <p>Form.page(&quot;projectList.cfm&quot;) |<br>
+              Form.page(&quot;statusUpdate.cfm?type=consulting&amp;projectID=n&amp;add=yes&quot;) 
+              |<br>
+              Form.page(&quot;statusUpdate.cfm?type=consulting&amp;projectID=<i>n</i>&amp;statusID=<i>n</i>&quot;) 
+              |<br>
+              Form.page(&quot;consulting.cfm?projectID=<i>n</i>&amp;statusDelete=<i>n</i>&amp;view=status&quot;) 
+              | <br>
+              Form.page(&quot;statusPrint.cfm?projectID=<i>n</i>&quot;)</p>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>URL.cancelType(&quot;consulting&quot;)</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#calendar">calendar.cfm</a></td>
+          <td>URL.tab, URL.form, URL.field</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="consultingSave"></a>
+      <p><font size="4"><b>consultingSave.cfm</b></font></p>
+	  <p>Whenever a user leaves <a href="interface.html#consulting">consulting.cfm</a> 
+        (with the exception of clicking &quot;Cancel&quot; or &quot;Admin&quot;) 
+        all of the data that is currently in the forms on consulting.cfm is sent 
+        to consultingSave.cfm, where it is saved to the database (tblProjects). 
+        consultingSave.cfm then sends the user to the appropriate page, as specified 
+        in Form.page.</p>
+      <p><b>Files that can request consultingSave.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#consulting">consulting.cfm</a></td>
+          <td>Form.page</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that consultingSave.cfm can request:</b></p>
+      <p>consultingSave.cfm can request any page that is passed to it (as a string) 
+        through Form.page. See <a href="interface.html#consulting">consulting.cfm</a> 
+        for a list of strings that can be passed to consultingSave.cfm.</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="disposals"></a>
+      <p><font size="4"><b>disposals.cfm</b></font></p>
+	  <img src="disposals.gif" width="700" height="525" border="0"> 
+      <p>disposals.cfm displays the project information for disposal projects. 
+        When the user clicks on the &quot;Details&quot; button of a disposal project 
+        from the Search Results, disposals.cfm is called. It reads the Project 
+        ID from the querystring to determine which project should be displayed 
+        and then retrieves the data from <a href="database.html#tblDisposals">tblDisposals</a> 
+        and <a href="database.html#tblProjects">tblProjects</a> and fills in the 
+        fields with this data. disposals.cfm can be requested from many other 
+        files and depending on the parameters passed to it, it may perform various 
+        update and append queries. When disposals.cfm is requested by projectList.cfm 
+        or newProject.cfm it saves all of it's data in Session variables so that 
+        if the user clicks &quot;Cancel&quot; projectList.cfm can restore all 
+        the data to it's original state.</p>
+      <p><b>Files that can request disposals.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposalSave">disposalSave.cfm</a></td>
+          <td>URL.projectID, URL.pinpidDelete | URL.statusDelete</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>URL.projectID, URL.backup</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#newProjectQuery">newProjectQuery.cfm</a></td>
+          <td>URL.projectID, URL.backup</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposalSummary">disposalSummary.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#addPINPID">addPINPID.cfm</a></td>
+          <td>URL.projectID, URL.view, [Form.pinpidAdd]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#statusUpdate">statusUpdate.cfm</a></td>
+          <td>URL.projectID, URL.view, [Form.statusAdd | Form.statusUpdate]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#addRemark">addRemark.cfm</a></td>
+          <td>URL.projectID, URL.view, [Form.remarkAdd]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#bandUpdate">bandUpdate.cfm</a></td>
+          <td>URL.projectID, URL.view, [Form.bandAdd | Form.bandUpdate]</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that disposals.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposalSave">disposalSave.cfm</a></td>
+          <td>Form.page(&quot;projectList.cfm&quot;) | <br>
+            Form.page(&quot;addPINPID.cfm?type=disposals&amp;projectID=<i>n</i>&quot;) 
+            |<br>
+            Form.page(&quot;disposals.cfm?projectID=<i>n</i>&amp;pinpidDelete=<i>n</i>&amp;view=property&quot;) 
+            | <br>
+            Form.page(&quot;statusUpdate.cfm?type=disposals&amp;projectID=<i>n</i>&amp;add=yes&quot;) 
+            |<br>
+            Form.page(&quot;statusUpdate.cfm?type=disposals&amp;projectID=<i>n</i>&amp;statusID=<i>n</i>&quot;) 
+            |<br>
+            Form.page(&quot;disposals.cfm?projectID=<i>n</i>&amp;statusDelete=<i>n</i>&amp;view=status&quot;) 
+            | <br>
+            Form.page(&quot;bandUpdate.cfm?projectID=<i>n</i>&amp;bandID=<i>n</i>&quot;) 
+            |<br>
+            Form.page(&quot;bandUpdate.cfm?projectID=<i>n</i>&amp;add=yes&quot;) 
+            |<br>
+            Form.page(&quot;addRemark.cfm?projectID=<i>n</i>&amp;bandID=<i>n</i>&quot;) 
+            |<br>
+            Form.page(&quot;statusPrint.cfm?projectID=<i>n</i>&quot;) | <br>
+            Form.page(&quot;factSheet.cfm?projectID=<i>n</i>&quot;) |<br>
+            Form.page(&quot;firstNationsPrint.cfm?projectID=<i>n</i>&quot;) |<br>
+            Form.page(&quot;disposalSummary.cfm?projectID=<i>n</i>&quot;)</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>URL.cancelType(&quot;disposal&quot;)</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposalSummary">disposalSummary.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#firstNationsPrint">firstNationsPrint.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#factSheet">factSheet.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#statusPrint">statusPrint.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#calendar">calendar.cfm</a></td>
+          <td>URL.tab, URL.form, URL.field</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="disposalSave"></a>
+      <p><font size="4"><b>disposalSave.cfm</b></font></p>
+	  <p>Whenever a logged-in user leaves <a href="interface.html#disposals">disposals.cfm</a> 
+        (with the exception of clicking &quot;Cancel&quot; or &quot;Admin&quot;) 
+        all of the data that is currently in the forms on disposals.cfm is sent 
+        to disposalSave.cfm, where it is saved to the database (<a href="database.html#tblDisposals">tblDisposals</a> 
+        and <a href="database.html#tblProjects">tblProjects</a>). disposalSave.cfm 
+        then sends the user to the appropriate page, as specified in Form.page. 
+        If the user is not logged in, they are sent directly to the page they 
+        requested.</p>
+      <p><b>Files that can request disposalSave.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>Form.page</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that disposalSave.cfm can request:</b></p>
+      disposalSave.cfm can request any page that is passed to it (as a string) 
+      through Form.page. See <a href="interface.html#disposals">disposals.cfm</a> 
+      for a list of strings that can be passed to disposalSave.cfm. 
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="disposalSummary"></a>
+      <p><font size="4"><b>disposalSummary.cfm</b></font></p>
+	  <img src="disposalSummary.gif" width="700" height="525" border="0">
+	  <p>When the user wants to print the Summary of Property Disposal , they 
+        are first taken to disposalSummary.cfm where they can use the form to 
+        edit the data that will actually be displayed. If the user has not yet 
+        clicked on &quot;Print Preview&quot; for this project then, when disposalSummary.cfm 
+        loads, the form will be filled with data from <a href="database.html#tblDisposals">tblDisposals</a> 
+        and <a href="database.html#tblProjects">tblProjects</a>. Then when the 
+        user clicks on &quot;Print Preview&quot; the data in the form will be 
+        saved to <a href="database.html#tblDispSummary">tblDispSummary</a>. From 
+        that point forward, when the user goes to disposalSummary.cfm, the form 
+        will be filled with data from tblDispSummary instead of tblDisposals and 
+        tblProjects.</p>
+      <p> If the user is logged in, then clicking on &quot;Disposal Summary&quot; 
+        on the &quot;Print&quot; menu from <a href="interface.html#disposals">disposals.cfm</a> 
+        will request <a href="interface.html#disposalSave">disposalSave.cfm</a> 
+        which, in turn, will request disposalSummary.cfm. If the user is not logged 
+        in, they will be taken directly to disposalSummary.cfm to avoid saving 
+        changes they may have made.</p>
+      <p><b>Files that can request disposalSummary.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#disposalSave">disposalSave.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that disposalSummary.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#disposalSummaryPrint">disposalSummaryPrint.cfm</a></td>
+          <td>Form.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="disposalSummaryPrint"></a>
+      <p><font size="4"><b>disposalSummaryPrint.cfm</b></font></p>
+	  <img src="disposalSummaryPrint.gif" width="700" height="525" border="0"> 
+      <p>disposalSummaryPrint.cfm displays data from <a href="database.html#tblDispSummary">tblDispSummary</a>, 
+        formatted as a Summary of Property Disposal report.</p>
+      <p><b>Files that can request disposalSummaryPrint.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#disposalSummary">disposalSummary.cfm</a></td>
+          <td>Form.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>Form.projectID</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that disposalSummaryPrint.cfm can request:</b></p>
+      <p>disposalSummaryPrint.cfm cannot request any pages, users must use the 
+        back button on their browser to return to disposalSummary.cfm</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+	   <a name="errorCurrency"></a>
+      <p><font size="4"><b>errorCurrency.cfm</b></font></p>
+	  <p>errorCurrency.cfm is displayed when a user enters data in a currency 
+        form field that cannot be converted into a currency. The error message 
+        contains the field's name and the data that the user entered (both are 
+        passed using QueryString parameters).</p>
+      <p><b>Files that can request errorCurrency.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitions">acquisitions.cfm</a></td>
+          <td>URL.field, URL.value</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitionSave">acquisitionSave.cfm</a></td>
+          <td>URL.field, URL.value</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#consultingSave">consultingSave.cfm</a></td>
+          <td>URL.field, URL.value</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposalSave">disposalSave.cfm</a></td>
+          <td>URL.field, URL.value</td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#newProjectQuery">newProjectQuery.cfm</a></td>
+          <td>URL.field, URL.value</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#appraisalUpdate">appraisalUpdate.cfm</a></td>
+          <td>URL.field, URL.value</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that errorCurrency.cfm can request:</b></p>
+      <p>errorCurrency.cfm cannot request any pages, users must use the 
+        back button on their browser to return to the page where they
+		entered the invalid data.</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+	   <a name="errorPINPID"></a>
+      <p><font size="4"><b>errorPINPID.cfm</b></font></p>
+	  <p>errorPINPID.cfm is included in acquisitions.cfm and disposals.cfm when 
+        a user attempts to add a PIN/PID that already exists. PIN/PID's must be 
+        unique. After errorPINPID.cfm is included, all other processing is aborted.</p>
+      <p><b>Files that can request errorPINPID.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitions">acquisitions.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that errorPINPID.cfm can request:</b></p>
+      <p>errorPINPID.cfm cannot request any pages, users must use the back button 
+        on their browser to return to addPINPID.cfm.</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	  
+	   <a name="factSheet"></a>
+      <p><font size="4"><b>factSheet.cfm</b></font></p>
+	  <img src="factSheet.gif" width="700" height="525" border="0"> 
+      <p>factSheet.cfm displays the data from tblFactSheet (as well as a couple 
+        of other tables) in a printable format. If the user is logged in, then 
+        clicking on &quot;Fact Sheet&quot; on the &quot;Print&quot; menu from 
+        <a href="interface.html#disposals">disposals.cfm</a> will request <a href="interface.html#disposalSave">disposalSave.cfm</a> 
+        which, in turn, will request factSheet.cfm. If the user is not logged 
+        in, they will be taken directly to factSheet.cfm to avoid saving changes 
+        they may have made to the project. </p>
+      <p><b>Files that can request factSheet.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#disposalSave">disposalSave.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that factSheet.cfm can request:</b></p>
+      <p>factSheet.cfm cannot request any pages, users must use the back button 
+        on their browser to return to <a href="interface.html#disposals">disposals.cfm</a>. 
+        Note that, because <a href="interface.html#disposalSave">disposalSave.cfm</a> 
+        does not send any information to the browser, the back button does not 
+        return the user to it.</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="firstNationsPrint"></a>
+      <p><font size="4"><b>firstNationsPrint.cfm</b></font></p>
+	  <img src="firstNationsPrint.gif" width="700" height="525" border="0"> 
+      <p>firstNationsPrint.cfm displays the First Nations consultation data in 
+        a printable format. If the user is logged in, then clicking on &quot;First 
+        Nations Consultations&quot; on the &quot;Print&quot; menu from <a href="interface.html#disposals">disposals.cfm</a> 
+        will request <a href="interface.html#disposalSave">disposalSave.cfm</a> 
+        which, in turn, will request firstNationsPrint.cfm. If the user is not 
+        logged in, they will be taken directly to firstNationsPrint.cfm to avoid 
+        saving changes they may have made. </p>
+      <p><b>Files that can request firstNationsPrint.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#disposalSave">disposalSave.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that firstNationsPrint.cfm can request:</b></p>
+      <p>firstNationsPrint.cfm cannot request any pages, users must use the back 
+        button on their browser to return to <a href="interface.html#disposals">disposals.cfm</a>. 
+        Note that, because <a href="interface.html#disposalSave">disposalSave.cfm</a> 
+        does not send any information to the browser, the back button does not 
+        return the user to it.</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="generalReport"></a>
+      <p><font size="4"><b>generalReport.cfm</b></font></p>
+	  <img src="generalReport.gif" width="700" height="444" border="0">
+	  <p>generalReport.cfm produces a report formatted for printing from the browser. 
+        It displays whatever projects were found and listed on the <a href="interface.html#projectList">Search 
+        Results</a> page. These projects are sorted based on user input on <a href="interface.html#generalReportCreate">generalReportCreate.cfm</a>. 
+        User input on generalReportCreate.cfm also indicates whether SSA Amount 
+        and Expenditures to Date information will be displayed in the report.</p>
+      <p><b>Files that can request generalReport.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#generalReportCreate">generalReportCreate.cfm</a></td>
+          <td>Form.include</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that generalReport.cfm can request:</b></p>
+      <p>generalReport.cfm cannot request any pages, users must use the 
+        back button on their browser to return to generalReportCreate.cfm</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="generalReportCreate"></a>
+      <p><font size="4"><b>generalReportCreate.cfm</b></font></p>
+	  <img src="generalReportCreate.gif" width="700" height="525" border="0"> 
+      <p>generalReportCreate.cfm is used to let the user choose the sort for the 
+        General Report, as well as indicate whether or not SSA Amount and Expenditures 
+        to Date information should be included in the report. When the user is 
+        done they can click &quot;Submit&quot; to view the formatted <a href="interface.html#generalReport">General Report</a> 
+        and print it, or they can click &quot;Cancel&quot; to return to the <a href="interface.html#projectList">Search 
+        Results</a>. </p>
+      <p><b>Files that can request generalReportCreate.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that generalReportCreate.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#generalReport">generalReport.cfm</a></td>
+          <td>Form.include</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#projectSearch">projectSearch.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#newProject">newProject.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="header"></a>
+      <p><font size="4"><b>header.cfm</b></font></p>
+	  <img src="header.gif" width="500" height="300" border="0">
+	  <p>header.cfm is included at the top of most pages in the system. It provides 
+        drop down menus for navigation as well as declares JavaScript functions, 
+        CSS, and browser detection. The availability of menus and their contents 
+        change according to the current page being displayed and according to 
+        whether the user is logged in or not.</p>
+      <p>Because header.cfm is an include file, it does not specifcally request 
+        any files, nor is it requested by any.</p>
+      <p>&nbsp;</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="help"></a>
+      <p><font size="4"><b>help.html</b></font></p>
+	  <img src="help.gif" width="510" height="429" border="0">
+	  <p>&nbsp;</p>
+      <p><b>Files that can request help.html:</b></p>
+      <p>Any file that has header.cfm included in it can request help.html</p>
+      <br>
+      <br>
+      <p><b>Files that help.html can request:</b></p>
+      <p>help.html does not request any files exept itself when the user clicks 
+        on a hyperlink to an anchor.</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="index"></a>
+      <p><font size="4"><b>index.cfm</b></font></p>
+	  <p>index.cfm is the default page for the main directory. It simply redirects 
+        the browser to <a href="interface.html#projectSearch">projectSearch.cfm</a>.</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="login"></a>
+      <p><font size="4"><b>login.cfm</b></font></p>
+	  <img src="login.gif" width="700" height="525" border="0"> 
+      <p>When the user fills out the form and clicks submit, the form is sent 
+        to projectSearch.cfm along with the hidden field, Form.LoggingOn. This 
+        tells projectSearch.cfm to attempt to log in the user. If the user information 
+        is correct, the appropriate client variables are set to log in the user, 
+        otherwise projectSearch.cfm requests login.cfm?failed=yes and the process 
+        is repeated.</p>
+      <p><b>Files that can request login.cfm:</b></p>
+      <p>Every file that has header.cfm included in it can request login.cfm as 
+        long as they are not logged in already.</p>
+      <br>
+      <p><b>Files that login.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectSearch">projectSearch.cfm</a></td>
+          <td>[Form.LoggingOn | URL.Logout]</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="newProject"></a>
+      <p><font size="4"><b>newProject.cfm</b></font></p>
+	  <img src="newProject.gif" width="700" height="525" border="0"> 
+      <p>newProject.cfm is where the user creates a new project. Except for the 
+        Project Type drop-down list, all the fields on this page are common to 
+        all three project types. The user may add new options to three of the 
+        drop-down lists: Location, Client/Department, and Client Contact. When 
+        the user clicks on one of the &quot;Add New&quot; buttons they will be 
+        taken to <a href="interface.html#addOptions">addOptions.cfm</a>. When they 
+        return, the option they added will automatically be selected. When they 
+        have finished filling in the data for their new project, the user can 
+        click on &quot;Submit&quot; or &quot;Cancel&quot;. If they choose submit 
+        the form is sent to newProjectQuery.cfm which creates the new project 
+        and sends the user to the appropriate page (<a href="interface.html#acquisitions">acquisitions.cfm</a>, 
+        <a href="interface.html#disposals">disposals.cfm</a>, or <a href="interface.html#consulting">consulting.cfm</a>).</p>
+      <p><b>Files that can request newProject.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectSearch">projectSearch.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that newProject.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#newProjectQuery">newProjectQuery.cfm</a></td>
+          <td>Form.projectType</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#addOptions">addOptions.cfm</a></td>
+          <td>Form.optionType </td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectSearch">projectSearch.cfm</a></td>
+          <td>[URL.Logout(&quot;yes&quot;)]</td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">admin/errorDuplicate.cfm</td>
+          <td>URL.item( Location Name | Department Name | Department Abbreviation 
+            | Client Contact Name )</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="newProjectQuery"></a>
+      <p><font size="4"><b>newProjectQuery.cfm</b></font></p>
+	  <p>newProjectQuery.cfm is called when a user clicks on "Submit" on <a href="interface.html#newProject">newProject.cfm</a>. 
+        It reads Form.projectType and performs the appropriate queries to create 
+        a new project of the type specified in this field. The data from the other 
+        fields from newProject.cfm is also entered into the project. </p>
+	  <p><b>Files that can request newProjectQuery.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#newProject">newProject.cfm</a></td>
+          <td>Form.projectType</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that newProjectQuery.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#acquisitions">acquisitions.cfm</a></td>
+          <td>URL.projectID, URL.backup</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>URL.projectID, URL.backup</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#consulting">consulting.cfm</a></td>
+          <td>URL.projectID, URL.backup</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="projectList"></a>
+      <p><font size="4"><b>projectList.cfm</b></font></p>
+	  <img src="projectList.gif" width="700" height="525" border="0"> 
+      <p>projectList.cfm displays all the projects that meet the criteria entered 
+        in <a href="interface.html#projectSearch">projectSearch.cfm</a>. The form 
+        data from projectSearch.cfm is saved into client variables so that if 
+        projectList.cfm is requested by a page other than projectSearch.cfm, it 
+        can still generate the same search query. projectList.cfm generates a 
+        link for each project consisting of the appropriate project page (either 
+        <a href="interface.html#acquisitions">acquisitions.cfm</a>, <a href="interface.html#disposals">disposals.cfm</a> 
+        or <a href="interface.html#consulting">consulting.cfm</a>) followed by 
+        the &quot;projectID&quot; querystring parameter. The user can sort the 
+        projects by clicking on the column headings. When this happens, projectList.cfm 
+        sends a form to itself with Form.sort containing the field to be sorted 
+        by. If a user clicks on &quot;Cancel&quot; on one of the project pages, 
+        projectList.cfm performs queries to restore the projects data to that 
+        which is saved in the session variables. </p>
+      <p><b>Files that can request projectList.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>Form.sort</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectSearch">projectSearch.cfm</a></td>
+          <td>Form.status, Form.projectType, Form.location, Form.description, 
+            Form.agent, Form.department, Form.projectNo, Form.fileNo, Form.clientContact</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitions">acquisitions.cfm</a></td>
+          <td>URL.cancelType</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitionSave">acquisitionSave.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>URL.cancelType</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposalSave">disposalSave.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#consulting">consulting.cfm</a></td>
+          <td>URL.cancelType</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#consultingSave">consultingSave.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#newProject">newProject.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#generalReportCreate">generalReportCreate.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#SCHReportCreate">SCHReportCreate.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that projectList.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>Form.sort</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectSearch">projectSearch.cfm</a></td>
+          <td>[URL.Logout(&quot;Yes&quot;)]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#newProject">newProject.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitions">acquisitions.cfm</a></td>
+          <td>URL.projectID, URL.backup</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>URL.projectID, URL.backup</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#consulting">consulting.cfm</a></td>
+          <td>URL.projectID, URL.backup</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#generalReportCreate">generalReportCreate.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectSummaryReport">projectSummaryReport.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectSummaryReport">projectSummaryReport.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="projectSearch"></a>
+      <p><font size="4"><b>projectSearch.cfm</b></font></p>
+	  <img src="projectSearch.gif" width="700" height="525" border="0">
+	  <p>projectSearch.cfm is the first page the user should see. It has two functions. 
+        The first is to let the user search for projects. The second function 
+        is to attempt log in the user if they have submited their login info on 
+        login.cfm, and to log out the user when they click &quot;Logout&quot;. 
+        If an attempted log in fails, projectSearch.cfm will redirect the user 
+        to login.cfm?failed=yes. </p>
+      <p><b>Files that can request projectSearch.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#index">index.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectSearch">projectSearch.cfm</a></td>
+          <td>[URL.Logout]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>[URL.Logout]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#newProject">newProject.cfm</a></td>
+          <td>[URL.Logout]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#SCHReportCreate">SCHReportCreate.cfm</a></td>
+          <td>[URL.Logout]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#generalReportCreate">generalReportCreate.cfm</a></td>
+          <td>[URL.Logout]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#login">login.cfm</a></td>
+          <td>Form.LoggingOn</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that projectSearch.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#projectSearch">projectSearch.cfm</a></td>
+          <td>[URL.Logout]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>Form.status, Form.projectType, Form.location, Form.description, 
+            Form.agent, Form.department, Form.projectNo, Form.fileNo, Form.clientContact</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#newProject">newProject.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#login">login.cfm</a></td>
+          <td>[URL.failed]</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="projectSummaryReport"></a>
+      <p><font size="4"><b>projectSummaryReport.cfm</b></font></p>
+	  <img src="projectSummaryReport.gif" width="700" height="444" border="0"> 
+      <p>generalReport.cfm produces a report formatted for printing from the browser. 
+        It displays whatever projects were found and listed on the <a href="interface.html#projectList">Search 
+        Results</a> page and in the same order. </p>
+      <p><b>Files that can request projectSummaryReport.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that projectSummaryReport.cfm can request:</b></p>
+      <p>projectSummaryReport.cfm cannot request any pages, users must use the 
+        back button on their browser to return to projectList.cfm</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="SCHReport"></a>
+      <p><font size="4"><b>SCHReport.cfm</b></font></p>
+	  <img src="SCHReport.gif" width="700" height="444" border="0"> 
+      <p>SCHReport.cfm produces a report formatted for printing from the browser. 
+        It displays whatever projects were found and listed on the <a href="interface.html#projectList">Search 
+        Results</a> page. These projects are sorted based on user input on <a href="interface.html#SCHReportCreate">SCHReportCreate.cfm</a>. 
+        User input on SCHReportCreate.cfm also determines the totals for SSA Amount 
+        and Expenditures to Date that are displayed at the top of the report.</p>
+      <p><b>Files that can request SCHReport.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#SCHReportCreate">SCHReportCreate.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that SCHReport.cfm can request:</b></p>
+      <p>projectSummaryReport.cfm cannot request any pages, users must use the 
+        back button on their browser to return to projectList.cfm</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="SCHReportCreate"></a>
+      <p><font size="4"><b>SCHReportCreate.cfm</b></font></p>
+	  <img src="SCHReportCreate.gif" width="700" height="525" border="0"> 
+      <p>SCHReportCreate.cfm is used to let the user choose the sort for the SCH 
+        Report, as well as enter the SSA Amount and Expenditures to Date totals 
+        that are listed at the top of the report. When the user is done they can 
+        click &quot;Submit&quot; to view the formatted <a href="interface.html#SCHReport">SCH 
+        Report</a> and print it, or they can click &quot;Cancel&quot; to return 
+        to the <a href="interface.html#projectList">Search Results</a>. </p>
+      <p><b>Files that can request SCHReportCreate.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that SCHReportCreate.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#SCHReport">SCHReport.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#projectList">projectList.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#projectSearch">projectSearch.cfm</a></td>
+          <td>[URL.Logout]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#login">login.cfm</a></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="statusPrint"></a>
+      <p><font size="4"><b>statusPrint.cfm</b></font></p>
+	  <img src="statusPrint.gif" width="700" height="525" border="0"> 
+      <p>statusPrint.cfm displays the Status Updates for a specific project in 
+        a printable format. If the user is logged in, then clicking on &quot;Status 
+        Journal &quot; on the &quot;Print&quot; menu from the project pages (<a href="interface.html#acquisitions">acquisitions.cfm</a>, 
+        <a href="interface.html#disposals">disposals.cfm</a>, and <a href="interface.html#consulting">consulting.cfm</a>) 
+        will request the project's save page (<a href="interface.html#acquisitionSave">acquisitionSave.cfm</a>, 
+        <a href="interface.html#disposalSave">disposalSave.cfm</a>, or <a href="interface.html#consultingSave">consultingSave.cfm</a>) 
+        which, in turn, will request statusPrint.cfm. If the user is not logged 
+        in, they will be taken directly to statusPrint.cfm to avoid saving changes 
+        they may have made to the project.</p>
+      <p><b>Files that can request statusPrint.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#acquisitions">acquisitions.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#acquisitionSave">acquisitionSave.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposalSave">disposalSave.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#consulting">consulting.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#consultingSave">consultingSave.cfm</a></td>
+          <td>URL.projectID</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that statusPrint.cfm can request:</b></p>
+      <p>statusPrint.cfm cannot request any pages, users must use the back button 
+        on their browser to return to the project page. Note that, because <a href="interface.html#acquisitionSave">acquisitionSave.cfm</a>, 
+        <a href="interface.html#disposalSave">disposalSave.cfm</a> and <a href="interface.html#consultingSave">consultingSave.cfm</a> 
+        do not send any information to the browser, the back button does not return 
+        the user to these pages.</p>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="statusUpdate"></a>
+      <p><font size="4"><b>statusUpdate.cfm</b></font></p>
+	  <img src="statusUpdate.gif" width="700" height="525" border="0"> 
+      <p>Projects of all types can have many status updates. When the user clicks 
+        on the &quot;Add New&quot; or &quot;Edit&quot; buttons on status section 
+        of the project pages, they are taken to statusUpdate.cfm (via <a href="interface.html#acquisitionSave">acquisitionSave.cfm</a>, 
+        <a href="interface.html#disposalSave">disposalSave.cfm</a>, or <a href="interface.html#consultingSave">consultingSave.cfm</a>) 
+        where they fill out a simple form and click either &quot;Submit&quot; 
+        or &quot;Cancel&quot;. The form is sent to the page specified in URL.type 
+        (either <a href="interface.html#acquisitions">acquisitions.cfm</a>, <a href="interface.html#disposals">disposals.cfm</a>.cfm 
+        or <a href="interface.html#consulting">consulting.cfm</a>).</p>
+      <p><b>Files that can request statusUpdate.cfm:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#acquisitionSave">acquisitionSave.cfm</a></td>
+          <td>URL.type(acquisitions), URL.projectID, URL.add | URL.statusID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposalSave">disposalSave.cfm</a></td>
+          <td>URL.type(disposals), URL.projectID, URL.add | URL.statusID</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#consultingSave">consultingSave.cfm</a></td>
+          <td>URL.type(consulting), URL.projectID, URL.add | URL.statusID</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <p><b>Files that statusUpdate.cfm can request:</b></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>QueryString Parameters and Form Fields</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="interface.html#acquisitions">acquisitions.cfm</a></td>
+          <td>URL.projectID, URL.view, [Form.statusAdd | Form.statusUpdate]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#disposals">disposals.cfm</a></td>
+          <td>URL.projectID, URL.view, [Form.statusAdd | Form.statusUpdate]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#consulting">consulting.cfm</a></td>
+          <td>URL.projectID, URL.view, [Form.statusAdd | Form.statusUpdate]</td>
+        </tr>
+        <tr> 
+          <td valign="top"><a href="interface.html#calendar">calendar.cfm</a></td>
+          <td>URL.form, URL.field</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p>
+	  <p>&nbsp;</p>
+	   
+        <a name="admin"></a>
+	  <p><font size="4"><b>Admin Files</b></font></p>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr> 
+          <td width="180"><b>File</b></td>
+          <td width="525"><b>Description</b></td>
+        </tr>
+        <tr> 
+          <td>agentAdmin.cfm</td>
+          <td>displays tblAgent data and links to add, edit and delete records</td>
+        </tr>
+        <tr> 
+          <td>agentEdit.cfm</td>
+          <td>allows user to add or edit a tblAgent record</td>
+        </tr>
+        <tr> 
+          <td>asciiAcquisitions.cfm</td>
+          <td>creates a comma delimited text file, from several tables, that can 
+            be saved</td>
+        </tr>
+        <tr> 
+          <td>asciiConsulting.cfm</td>
+          <td>creates a comma delimited text file, from several tables, that can 
+            be saved</td>
+        </tr>
+        <tr> 
+          <td>asciiDisposals.cfm</td>
+          <td>creates a comma delimited text file, from several tables, that can 
+            be saved</td>
+        </tr>
+        <tr> 
+          <td>asciiDownload.cfm</td>
+          <td>provides links to the comma delimited ASCII text file producing 
+            pages</td>
+        </tr>
+        <tr> 
+          <td>clientContactAdmin.cfm</td>
+          <td>displays tblClientContact data and links to add, edit and delete 
+            records</td>
+        </tr>
+        <tr> 
+          <td>clientContactEdit.cfm</td>
+          <td>allows user to add or edit a tblClientContact record</td>
+        </tr>
+        <tr> 
+          <td>deptAdmin.cfm</td>
+          <td>displays tblDept data and links to add, edit and delete records</td>
+        </tr>
+        <tr> 
+          <td>deptEdit.cfm</td>
+          <td>allows user to add or edit a tblDept record</td>
+        </tr>
+        <tr> 
+          <td>disposalMethodAdmin.cfm</td>
+          <td>displays tblDisposalMethod data and links to add, edit and delete 
+            records</td>
+        </tr>
+        <tr> 
+          <td>disposalMethodEdit.cfm</td>
+          <td>allows user to add or edit a tblDisposalMethod record</td>
+        </tr>
+        <tr> 
+          <td>errorDuplicate.cfm</td>
+          <td>error page that is displayed when a user attempts to add an item 
+            that already exists</td>
+        </tr>
+        <tr> 
+          <td>errorReferentialIntegrity</td>
+          <td>error page that is displayed when a user attempts to violate referential 
+            integrity rules</td>
+        </tr>
+        <tr> 
+          <td>index.cfm</td>
+          <td>default page for admin directory, provides links to admin pages</td>
+        </tr>
+        <tr> 
+          <td>interestSoldAdmin.cfm</td>
+          <td>displays tblInterestSold data and links to add, edit and delete 
+            records</td>
+        </tr>
+        <tr> 
+          <td>interestSoldEdite.cfm</td>
+          <td>allows user to add or edit a tblInterestSold record</td>
+        </tr>
+        <tr> 
+          <td>locationAdmin.cfm</td>
+          <td>displays tblLocation data and links to add, edit and delete records</td>
+        </tr>
+        <tr> 
+          <td>locationEdit.cfm</td>
+          <td>allows user to add or edit a tblLocation record</td>
+        </tr>
+        <tr> 
+          <td>nav.cfm</td>
+          <td>included in many files as header, provides links to admin pages</td>
+        </tr>
+        <tr> 
+          <td>passwordAdmin.cfm</td>
+          <td>allows user to change password</td>
+        </tr>
+        <tr> 
+          <td>projectAdmin.cfm</td>
+          <td>displays some tblProject data and links to delete records</td>
+        </tr>
+        <tr> 
+          <td>propertyTypeAdmin.cfm</td>
+          <td>displays tblPropertyType data and links to add, edit and delete 
+            records</td>
+        </tr>
+        <tr> 
+          <td>propertyTypeEdit.cfm</td>
+          <td>allows user to add or edit a tblPropertyType record</td>
+        </tr>
+        <tr> 
+          <td>purchaserTypeAdmin.cfm</td>
+          <td>displays tblPurchaserType data and links to add, edit and delete 
+            records</td>
+        </tr>
+        <tr> 
+          <td>purchaserTypeEdit.cfm</td>
+          <td>allows user to add or edit a tblPurchaserType record</td>
+        </tr>
+        <tr> 
+          <td>style.css</td>
+          <td>a Cascading Style Sheet included in many of the admin pages</td>
+        </tr>
+        <tr> 
+          <td>tblAccessLevel.cfm</td>
+          <td>creates a comma delimited text file, from tblAccessLevel, that can 
+            be saved</td>
+        </tr>
+        <tr> 
+          <td>tblAcqSummary.cfm</td>
+          <td>creates a comma delimited text file, from tblAcqSummary, that can 
+            be saved</td>
+        </tr>
+        <tr> 
+          <td>tblAcquisitions.cfm</td>
+          <td>creates a comma delimited text file, from tblAcquisitions, that 
+            can be saved</td>
+        </tr>
+        <tr> 
+          <td>tblAgent.cfm</td>
+          <td>creates a comma delimited text file, from tblAgent, that can be 
+            saved</td>
+        </tr>
+        <tr> 
+          <td>tblAppraisals.cfm</td>
+          <td>creates a comma delimited text file, from tblAppraisals, that can 
+            be saved</td>
+        </tr>
+        <tr> 
+          <td>tblBand.cfm</td>
+          <td>creates a comma delimited text file, from tblBand, that can be saved</td>
+        </tr>
+        <tr> 
+          <td>tblClientContact.cfm</td>
+          <td>creates a comma delimited text file, from tblClientContact, that 
+            can be saved</td>
+        </tr>
+        <tr> 
+          <td>tblDept.cfm</td>
+          <td>creates a comma delimited text file, from tblDept, that can be saved</td>
+        </tr>
+        <tr> 
+          <td>tblDisposalMethod.cfm</td>
+          <td>creates a comma delimited text file, from tblDisposalMethod, that 
+            can be saved</td>
+        </tr>
+        <tr> 
+          <td>tblDisposals.cfm</td>
+          <td>creates a comma delimited text file, from tblDisposals, that can 
+            be saved</td>
+        </tr>
+        <tr> 
+          <td>tblDispSummary.cfm</td>
+          <td>creates a comma delimited text file, from tblDispSummary, that can 
+            be saved</td>
+        </tr>
+        <tr> 
+          <td>tblFactSheet.cfm</td>
+          <td>creates a comma delimited text file, from tblFactSheet, that can 
+            be saved</td>
+        </tr>
+        <tr> 
+          <td>tblFirstNationsRemarks.cfm</td>
+          <td>creates a comma delimited text file, from tblFirstNationsRemarks, 
+            that can be saved</td>
+        </tr>
+        <tr> 
+          <td>tblInterestSold.cfm</td>
+          <td>creates a comma delimited text file, from tblInterestSold, that 
+            can be saved</td>
+        </tr>
+        <tr> 
+          <td>tblLocation.cfm</td>
+          <td>creates a comma delimited text file, from tblLocation, that can 
+            be saved</td>
+        </tr>
+        <tr> 
+          <td>tblPINPID.cfm</td>
+          <td>creates a comma delimited text file, from tblPINPID, that can be 
+            saved</td>
+        </tr>
+        <tr> 
+          <td>tblProjects.cfm</td>
+          <td>creates a comma delimited text file, from tblProjects, that can 
+            be saved</td>
+        </tr>
+        <tr> 
+          <td>tblProjectType.cfm</td>
+          <td>creates a comma delimited text file, from tblProjectType, that can 
+            be saved</td>
+        </tr>
+        <tr> 
+          <td>tblPropertyType.cfm</td>
+          <td>creates a comma delimited text file, from tblPropertyType, that 
+            can be saved</td>
+        </tr>
+        <tr> 
+          <td>tblProvince.cfm</td>
+          <td>creates a comma delimited text file, from tblProvince, that can 
+            be saved</td>
+        </tr>
+        <tr> 
+          <td>tblPurchaserType.cfm</td>
+          <td>creates a comma delimited text file, from tblPurchaserType, that 
+            can be saved</td>
+        </tr>
+        <tr> 
+          <td>tblStatus.cfm</td>
+          <td>creates a comma delimited text file, from tblStatus, that can be 
+            saved</td>
+        </tr>
+      </table>
+      <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#fileDescriptions">Top of File Descriptions</a></p><br>
+	   
+    </td>
+</tr>
+</table>
+<hr>
+<br>
+<table border="0" cellpadding="0" cellspacing="0" width="730">
+<tr>
+	<td width="30">&nbsp;</td>
+	<td width="700" colspan="2">
+		<a name="variables"></a><p><b><font size="4">Global Variables</font></b></p>
+	</td>
+</tr>
+<tr>
+	<td width="30">&nbsp;</td>
+	<td width="30">&nbsp;</td>
+	<td>
+		<br><br>
+      <b>Application Variables:</b><br>
+      <br>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="132"><b><font size="2">Name</font></b></td>
+          <td width="144"><b><font size="2">Value</font></b></td>
+          <td width="246"><b><font size="2">Description</font></b></td>
+          <td width="150"><b><font size="2">Files they are set by</font></b></td>
+        </tr>
+        <tr> 
+          <td valign="top" width="132"><font size="2">ds</font></td>
+          <td valign="top" width="144"><font size="2">&quot;NPS&quot;</font></td>
+          <td valign="top" width="246"><font size="2">contains the datasource 
+            name</font></td>
+          <td valign="top" width="150"><font size="2">application.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top" width="132"><font size="2">path_ascii</font></td>
+          <td valign="top" width="144"><font size="2">&quot;d:\inetpub\wwwroot\<br>
+            NPS\admin\ascii\&quot;</font></td>
+          <td valign="top" width="246"><font size="2">contains the physical path 
+            of the folder where the ascii text files are saved</font></td>
+          <td valign="top" width="150"><font size="2">application.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top" width="132"><font size="2">defaultDisposalMethod</font></td>
+          <td valign="top" width="144"><font size="2">1</font></td>
+          <td valign="top" width="246"><font size="2">contains the ID for the 
+            default Disposal Method</font></td>
+          <td valign="top" width="150"><font size="2">application.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top" width="132"><font size="2">defaultInterestSold</font></td>
+          <td valign="top" width="144"><font size="2">1</font></td>
+          <td valign="top" width="246"><font size="2">contains the ID for the 
+            default Interest Sold record</font></td>
+          <td valign="top" width="150"><font size="2">application.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top" width="132"><font size="2">defaultPropertyType</font></td>
+          <td valign="top" width="144"><font size="2">1</font></td>
+          <td valign="top" width="246"><font size="2">contains the ID for the 
+            default Property Type record</font></td>
+          <td valign="top" width="150"><font size="2">application.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top" width="132"><font size="2">defaultPurchaserType</font></td>
+          <td valign="top" width="144"><font size="2">1</font></td>
+          <td valign="top" width="246"><font size="2">contains the ID for the 
+            default Purchaser Type record</font></td>
+          . 
+          <td valign="top" width="150"><font size="2">application.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top" width="132"><font size="2">defaultClientContact</font></td>
+          <td valign="top" width="144"><font size="2">1</font></td>
+          <td valign="top" width="246"><font size="2">contains the ID for the 
+            default Client Contact record</font></td>
+          <td valign="top" width="150"><font size="2">application.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top" width="132"><font size="2">qryAgentCache</font></td>
+          <td valign="top" width="144"><font size="2">30 or 0</font></td>
+          <td valign="top" width="246"><font size="2">contains variable for CachedWithin 
+            attribute of qryAgent, temporarily set to 0 when qry needs to be reset</font></td>
+          <td valign="top" width="150"><font size="2">application.cfm, admin/agentAdmin.cfm, 
+            acquisitions.cfm, consulting.cfm, disposals.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top" width="132"><font size="2">qryDeptCache</font></td>
+          <td valign="top" width="144"><font size="2">30 or 0</font></td>
+          <td valign="top" width="246"><font size="2">contains variable for CachedWithin 
+            attribute of qryDept, temporarily set to 0 when qry needs to be reset</font></td>
+          <td valign="top" width="150"><font size="2">application.cfm, admin/deptAdmin.cfm, 
+            newProject.cfm, acquisitions.cfm, consulting.cfm, disposals.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top" width="132"><font size="2">qryLocationCache</font></td>
+          <td valign="top" width="144"><font size="2">15 or 0</font></td>
+          <td valign="top" width="246"><font size="2">contains variable for CachedWithin 
+            attribute of qryLocation, temporarily set to 0 when qry needs to be 
+            reset</font></td>
+          <td valign="top" width="150"><font size="2">application.cfm, admin/locationAdmin.cfm, 
+            newProject.cfm, acquisitions.cfm, consulting.cfm, disposals.cfm</font></td>
+        </tr>
+      </table>
+		<br><br>
+      <b>Cilent Variables:</b> <br>
+      <br>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="150"><b><font size="2">Name</font></b></td>
+          <td width="150"><b><font size="2">Default Value</font></b></td>
+          <td width="200"><b><font size="2">Description</font></b></td>
+          <td width="100"><b><font size="2">Files they are set by</font></b></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">LoggedIn</font></td>
+          <td valign="top"><font size="2">&quot;No&quot;</font></td>
+          <td valign="top"><font size="2">indicates whether the user is logged 
+            in or not</font></td>
+          <td valign="top"><font size="2">application.cfm, projectSearch.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">Admin</font></td>
+          <td valign="top"><font size="2">3</font></td>
+          <td valign="top"><font size="2">indicates the users access (or administrative) 
+            level</font></td>
+          <td valign="top"><font size="2">application.cfm, projectSearch.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">Employee_Nm</font></td>
+          <td valign="top"><font size="2">&nbsp;</font></td>
+          <td valign="top"><font size="2">contains the user's name if they are 
+            logged in</font></td>
+          <td valign="top"><font size="2">application.cfm, projectSearch.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">Employee_ID</font></td>
+          <td valign="top"><font size="2">&nbsp;</font></td>
+          <td valign="top"><font size="2">contains the user's ID if they are logged 
+            in</font></td>
+          <td valign="top"><font size="2">application.cfm, projectSearch.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">sort</font></td>
+          <td valign="top"><font size="2">&quot;tblProjectType.strProjType&quot;</font></td>
+          <td valign="top"><font size="2">contains the current sort parameter</font></td>
+          <td valign="top"><font size="2">application.cfm, projectList.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">lastSort</font></td>
+          <td valign="top"><font size="2">&quot;tblLocation.strLocation&quot;</font></td>
+          <td valign="top"><font size="2">contains the previous sort parameter</font></td>
+          <td valign="top"><font size="2">application.cfm, projectList.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">status</font></td>
+          <td valign="top"><font size="2">&nbsp;</font></td>
+          <td valign="top"><font size="2">contains the value of the Status search 
+            parameter</font></td>
+          <td valign="top"><font size="2">projectList.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">projectType</font></td>
+          <td valign="top"><font size="2">&nbsp;</font></td>
+          <td valign="top"><font size="2">contains the value of the Project Type 
+            search parameter</font></td>
+          <td valign="top"><font size="2">projectList.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">location</font></td>
+          <td valign="top"><font size="2">&nbsp;</font></td>
+          <td valign="top"><font size="2">contains the value of the Location search 
+            parameter</font></td>
+          <td valign="top"><font size="2">projectList.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">description</font></td>
+          <td valign="top"><font size="2">&nbsp;</font></td>
+          <td valign="top"><font size="2">contains the value of the Description 
+            search parameter</font></td>
+          <td valign="top"><font size="2">projectList.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">agent</font></td>
+          <td valign="top"><font size="2">&nbsp;</font></td>
+          <td valign="top"><font size="2">contains the value of the Advisor search 
+            parameter</font></td>
+          <td valign="top"><font size="2">projectList.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">department</font></td>
+          <td valign="top"><font size="2">&nbsp;</font></td>
+          <td valign="top"><font size="2">contains the value of the Client/Department 
+            search parameter</font></td>
+          <td valign="top"><font size="2">projectList.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">projectNo</font></td>
+          <td valign="top"><font size="2">&nbsp;</font></td>
+          <td valign="top"><font size="2">contains the value of the Project Number 
+            search parameter</font></td>
+          <td valign="top"><font size="2">projectList.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">fileNo</font></td>
+          <td valign="top"><font size="2">&nbsp;</font></td>
+          <td valign="top"><font size="2">contains the value of the File Number 
+            search parameter</font></td>
+          <td valign="top"><font size="2">projectList.cfm</font></td>
+        </tr>
+        <tr> 
+          <td valign="top"><font size="2">clientContact</font></td>
+          <td valign="top"><font size="2">&nbsp;</font></td>
+          <td valign="top"><font size="2">contains the value of the Client Contact 
+            search parameter</font></td>
+          <td valign="top"><font size="2">projectList.cfm</font></td>
+        </tr>
+      </table>
+		<br><p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#interface">Top of Interface</a></p><br>
+	</td>
+</tr>
+</table>
+<hr>
+<br>
+<table border="0" cellpadding="0" cellspacing="0" width="730">
+<tr>
+<td width="30">&nbsp;</td>
+<td width="700">
+<a name="security"></a>
+      <p><b><font size="4">Security Setup and User Access</font></b></p>
+      <p>There are three levels of user access:</p>
+	  <ul>
+	  	<li>Read (read only)</li>
+		<li>Write (read/write)</li>
+		<li>Admin (read/write/admin)</li>
+	  </ul>
+	  <p><b>Read:</b> Users do not need an account to gain Read access, but there is a Read classification for 
+	  accounts of advisors who no longer work with REAS. The accounts still exist because these advisors' names
+	  are still associated with projects, so their record must remain in 
+	  <a href="database.html#tblAgent">tblAgent</a>. Users with Read access
+	  can look at all data and print all reports but they cannot edit or add any data.</p>
+	  <p><b>Write:</b> To gain Write access, users must have a Write access account and be logged in to the system.
+	  Once a user is logged in they will remain so even after leaving and returning to the system, 
+	  provided the user is accessing the system with the same computer and web browser and they have
+	  not manually logged out. With Write access users can edit data for all projects as well as add new projects.
+	  Write access users can also use some of the features in the Admin section; they can add, edit and delete
+	  departments, locations and client contacts, as well as change their passwords and download data from the
+	  database in ASCII comma delimited text format.</p>
+	  <p><b>Admin:</b> Admin access works the exact same as Write, except that Admin users can access all
+	  of the features in the Admin section. In addition to the Admin features mentioned for Write access,
+	  Admin users can also add, edit and delete advisor accounts, disposal methods, interest types, property 
+	  types and purchaser types, as well as delete projects.</p>
+	  <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#interface">Top of Interface</a></p><br>
+</td>
+</tr>
+</table>
+<hr>
+<br>
+<table border="0" cellpadding="0" cellspacing="0" width="730">
+<tr>
+<td width="30">&nbsp;</td>
+<td width="700">
+<a name="enhancements"></a><p><b><font size="4">Future Enhancements</font></b></p>
+      <ul>
+        <li>multiple select lists on projectSearch.cfm to allow for multiple search 
+          parameters for one field</li>
+        <li>the ability to sort the data that is displayed in the admin/xxxxAdmin.cfm 
+          pages, particularly projectsAdmin.cfm</li>
+		<li>display the search results in a layer that scrolls so that the user only 
+		  has to scroll through the results and not the whole page, thus, the column
+		  headers and page header will always remain at the top of the page
+        <li>a way to convert reports to .pdf format</li>
+        <li>BC Assessments component that provides current information</li>
+        <li>context sensitive help buttons</li>
+        <li>change the Acquisition, Disposal and Consulting sections so that when 
+          a user makes changes to data that can have many items (i.e.Status Updates 
+          or PIN/PID's) and then clicks &quot;Cancel&quot;, those changes are 
+          undone. </li>
+      </ul>
+	  <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#interface">Top of Interface</a></p><br>
+</td>
+</tr>
+</table>
+<hr>
+<br>
+<table border="0" cellpadding="0" cellspacing="0" width="730">
+<tr>
+<td width="30">&nbsp;</td>
+<td width="700">
+<a name="maintenance"></a>
+      <p><b><font size="4">Maintenance Procedures</font></b></p>
+      <p>Performing these procedures will require a decent understanding of HTML, 
+        ColdFusion, JavaScript and possibly Macromedia Fireworks. This section 
+        is only meant to be used as a guide and does not provide the details of 
+        each step.</p>
+	  
+	  <p><b>Add a field to a project type</b><br>
+        In the description below we are adding a field called &quot;<i>xxxxx</i>&quot; 
+        to the Acquisition project type. Substitute &quot;Disposal&quot; or &quot;Consulting&quot; 
+        in place of &quot;Acquisition&quot; if you are adding a field to one of 
+        these project types. </p>
+	  <ol>
+        <li>Add the field to the database (either tblAcquisitions or, if other 
+          project types will use this field as well, tblProjects).**</li>
+        <li>In acquisitions.cfm: 
+          <ul>
+            <li>Add the field name to the SELECT statement of the query, &quot;qryDisplayProject&quot;.</li>
+            <li>Add two statements to the JavaScript function, &quot;sendForm&quot;. 
+              One for Netscape browsers and one for Internet Explorer browsers.</li>
+            <li>Add two &lt;CFSET&gt; statements between the &lt;CFOUTPUT QUERY=&quot;qryDisplayProject&quot;&gt; 
+              tags. One to set a variable called &quot;proj<i>xxxxx</i>&quot; and one 
+              to set a variable called &quot;session.backup<i>xxxxx</i>&quot;.</li>
+            <li>Add a hidden field to the form, &quot;mainForm&quot;. If the field 
+              is required or must be a certain datatype add extra hidden fields 
+              to validate this.</li>
+            <li>Add a new field to the form on the layer (tab) of your choice. 
+              Set the value of the field equal to &quot;proj<i>xxxxx</i>&quot;.</li>
+          </ul>
+        </li>
+        <li>In acquisitionSave.cfm: 
+          <ul>
+            <li>If <i>xxxxx</i> is a currency field, add statements to format it properly.</li>
+            <li>Add a line to the SET statement of the query, &quot;qryUpdateProject&quot;, 
+              if the field is in tblProjects or the query, &quot;qryUpdateAcquisition&quot;, 
+              if the field is in tblAcquisitions.</li>
+          </ul>
+        </li>
+        <li>In projectList.cfm: 
+          <ul>
+            <li>Add a &lt;CFSET&gt; statment after the statement, &lt;CFELSEIF 
+              IsDefined(&quot;URL.cancelType&quot;) AND URL.cancelType EQ &quot;acquisition&quot;&gt;, 
+              that sets the variable, &quot;temp<i>xxxxx</i>&quot;, equal to &quot;Session.backup<i>xxxxx</i>&quot;.</li>
+            <li>Add a line to the SET statement of the query, &quot;qryUpdateProject&quot;, 
+              if the field is in tblProjects or the query, &quot;qryUpdateAcquisition&quot;, 
+              if the field is in tblAcquisitions.</li>
+          </ul>
+        </li>
+      </ol>
+	  <p>** There are two extra fields already in the database if they need to 
+        be used. They are strExtraField1 and strExtraField2. Both fields are in 
+        the tblProjects table and are text fields with a length of 255 characters.</p>
+	  <br>
+      <p><b>Add a tab to a project type:</b><br>
+        In the description below we are adding a tab called <i>xxxxx</i> which will be 
+        the <i>n</i>th tab on the acquisition projects page. Substitute &quot;Disposal&quot; 
+        or &quot;Consulting&quot; in place of &quot;Acquisition&quot; if you are 
+        adding a tab to one of these project types. </p>
+	  <ol>
+        <li>Using Macromedia Fireworks open tabs.png: 
+          <ul>
+            <li>Create two tab images, one blue and one grey, using the other 
+              tabs as templates.</li>
+            <li>Export (using a slice) the blue tab as "images/tab_<i>xxxxx</i>_on.gif"</li>
+            <li>Export (using a slice) the grey tab as "images/tab_<i>xxxxx</i>.gif"</li>
+          </ul>
+        </li>
+        <li>In acquisitions.cfm: 
+          <ul>
+            <li>Add a style definition called #tab<i>n</i> with the visibility 
+              set the same way as the other tabs except the &lt;CFIF&gt; statement 
+              will read '... AND #URL.view# EQ &quot;<i>xxxxx</i>&quot;&gt;'.</li>
+            <li>In the JavaScript section of the page: 
+              <ul>
+                <li>define a tabButton object the same way as the others: <br>
+                  var tabButton<i>n</i> = new tabButton(&quot;tabButton_<i>n</i>&quot;, 
+                  &quot;images/tab_<i>xxxxx</i>_on.gif&quot;...</li>
+                <li>add a &lt;CFELSEIF&gt; statement for the new tab where &quot;lastTabButton&quot; 
+                  is being set:<br>
+                  &lt;CFELSEIF #URL.view# EQ &quot;<i>xxxxx</i>&quot;&gt;tabButton<i>n</i>&lt;/CFIF&gt;</li>
+                <li>in function tabChange( ) add a statement to set &quot;daTabButton&quot; 
+                  to tabButton<i>n</i></li>
+                <li>in function tabToggle( ) add a statement: <br>
+                  document.all('tab<i>n</i>').style.visibility = hidden;</li>
+                <li>add statements to function sendForm( ) if required.</li>
+              </ul>
+            </li>
+            <li>Add a column to the second table on the page with a hyperlinked 
+              image in the first row and a transparent image in the second row 
+              (similar to the other tabs).</li>
+            <li>Define a new layer on the page and fill it with content between 
+              the two &lt;DIV&gt; tags: 
+              <ul>
+                <li>&lt;DIV ID=&quot;tab<i>n</i>&quot; class=&quot;tab&quot;&gt; 
+                  &nbsp;&nbsp;&nbsp;&nbsp; &lt;/DIV&gt;</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ol>
+	  <p>&nbsp;</p>
+	  <p align="right"><a href="index.html">Return to Index</a> | <a href="interface.html#interface">Top of Interface</a></p><br>
+</td>
+</tr>
+</table>
+</body>
+</html>

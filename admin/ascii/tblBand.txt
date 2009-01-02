@@ -1,0 +1,5 @@
+"intBandID","intProjectID","strBandName","strChiefName","strContact","strPhone","strFax","strAddress","strEmail"
+3,540,"bill","bill","bill","","","",""
+4,540,"Musqueam","","","","","",""
+5,354,"Tsleil-Waututh (Burrard)","Chief Leonard George","","(604) 555-5555","","",""
+6,354,"Musqueam","Chief Gail Yvonne Sparrow","Archie Patrick (Band Administrator)","(604) 555-5555","","",""

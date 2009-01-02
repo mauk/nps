@@ -1,0 +1,2493 @@
+<html>
+<head>
+<title>NPS Documentation: Database</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<p><a href="index.html">Return to Index</a></p>
+<font size="5"><b>Database Design</b></font> <br>
+<br>
+The database is a MS Access 2000 database called Projects.mdb and is located in the Database/ folder
+<br><br>
+<a href="database.html#tableDefinitions">Table Definitions</a><br>
+<a href="database.html#relationships">Relationships and Referential Integrity</a><br>
+<a href="database.html#queries">Stored Queries</a><br>
+<p align="center">
+<img src="er.gif" width="835" height="620"></p>
+<p>Note: all tables are shown in diagram except for tblAcqSummary and tblDispSummary which have one-to-one
+  relationships with tblAcquisitions and tblDisposals, respectively.<br>
+</p>
+<hr>
+<table border="0" cellpadding="0" cellspacing="0" width="755">
+<tr>
+<td width="30"><img src="transparent.gif" width="30" height="1"></td>
+<td> 
+  <p><b><font size="4"><a name="tableDefinitions"></a>Table Definitions</font></b></p>
+   
+    <p><a href="database.html#tblAccessLevel">tblAccessLevel</a><br>
+      <a href="database.html#tblAcqSummary">tblAcqSummary</a><br>
+      <a href="database.html#tblAcquisitions">tblAcquisitions</a><br>
+      <a href="database.html#tblAgent">tblAgent</a><br>
+      <a href="database.html#tblAppraisals">tblAppraisals</a><br>
+      <a href="database.html#tblBand">tblBand</a><br>
+      <a href="database.html#tblClientContact">tblClientContact</a><br>
+      <a href="database.html#tblDept">tblDept</a><br>
+      <a href="database.html#tblDisposalMethod">tblDisposalMethod</a><br>
+      <a href="database.html#tblDisposals">tblDisposals</a><br>
+      <a href="database.html#tblDispSummary">tblDispSummary</a><br>
+      <a href="database.html#tblFactSheet">tblFactSheet</a><br>
+      <a href="database.html#tblFirstNationsRemarks">tblFirstNationsRemarks</a><br>
+      <a href="database.html#tblInterestSold">tblInterestSold</a><br>
+	  <a href="database.html#tblLocation">tblLocation</a><br>
+      <a href="database.html#tblPINPID">tblPINPID</a><br>
+      <a href="database.html#tblProjects">tblProjects</a><br>
+      <a href="database.html#tblProjectType">tblProjectType</a><br>
+      <a href="database.html#tblPropertyType">tblPropertyType</a><br>
+      <a href="database.html#tblProvince">tblProvince</a><br>
+      <a href="database.html#tblPurchaserType">tblPurchaserType</a><br>
+      <a href="database.html#tblStatus">tblStatus</a><br><br>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html">Top</a></p>
+	  <p>Note: <br>
+        Primary Key fields are in <font color="#FF0000">red</font><br>
+        Foreign Key fields are in <font color="#0000FF">blue</font></p>
+	   
+    <p><b><a name="tblAccessLevel"></a>tblAccessLevel</b></p>
+    <ul>
+		<li>tblAccessLevel is a look-up table for user access levels.</li>
+		<li>records in this table should not change</li>
+	</ul>
+	<br>
+    <table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intAccessLevel</font></td>
+        <td valign="top"><font color="#FF0000">Number</font></td>
+        <td valign="top"><font color="#FF0000">Byte</font></td>
+        <td valign="top"><font color="#FF0000">0</font></td>
+          <td valign="top">Access Level code</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAccessLevel</td>
+        <td valign="top">Text</td>
+        <td valign="top">10</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Access Level name</td>
+      </tr>
+    </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblAcqSummary"></a>tblAcqSummary</b></p>
+    <ul>
+		<li>tblAcqSummary is used to store the values that appear on the Summary 
+          of Property Acquisition report. This table is used to provide flexibility 
+          to the users in the way that they fill out the form, as opposed to taking 
+          all the data directly out of tblProjects and tblAcquisitions. It also 
+          provides flexibility in that all the fields that will be displayed on 
+          the report are text fields, so users are not restricted in the type 
+          of data they can enter in a field.</li>
+		<li>records entered and updated by all users</li>
+	</ul>
+	<br>
+    <table border="1" cellpadding="1" cellspacing="0">
+	  <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intProjectID</font></td>
+        <td valign="top"><font color="#FF0000">Number</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+          <td valign="top">links to tblAcquisitions.intProjectID 
+            to create a one-to-one relationship</td>
+      </tr>
+      <tr> 
+        <td valign="top">bolSaved</td>
+        <td valign="top">Yes/No</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">No</td>
+          <td valign="top">indicates whether the form on acquisitionSummary.cfm 
+            should take data from this table or from tblAcquisitions and tblProjects 
+          </td>
+      </tr>
+      <tr> 
+        <td valign="top">strLocation</td>
+        <td valign="top">Text</td>
+        <td valign="top">70</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Property location</td>
+      </tr>
+      <tr> 
+        <td valign="top">strDescription</td>
+        <td valign="top">Text</td>
+        <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Project description</td>
+      </tr>
+      <tr> 
+        <td valign="top">strLegal</td>
+        <td valign="top">Text</td>
+        <td valign="top">150</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Legal description of property</td>
+      </tr>
+      <tr> 
+        <td valign="top">strRollNumber</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Roll Number</td>
+      </tr>
+      <tr> 
+        <td valign="top">strCustodian</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Custodian department of property</td>
+      </tr>
+      <tr> 
+        <td valign="top">strPropertyUse</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strInterestAcquired</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Interest type acquired</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAcquiredFrom</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strPurchasePrice</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAppraisedValue</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAcquisitionDate</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAgent</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Advisor for project</td>
+      </tr>
+      <tr> 
+        <td valign="top">strFileNo</td>
+        <td valign="top">Textb</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">memRemarks</td>
+        <td valign="top">Memo</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+    </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblAcquisitions"></a>tblAcquisitions</b></p>
+      <ul>
+        <li>tblAcquisitions holds all the project data that is specific to acquisition 
+          projects.</li>
+        <li>records entered and updated by users with write or admin access</li>
+      </ul>
+	<br>
+      
+    <table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intProjectID</font></td>
+        <td valign="top"><font color="#FF0000">Number</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr> 
+        <td valign="top">datOffer</td>
+        <td valign="top">Date/Time</td>
+        <td valign="top">Short Date</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Offer date</td>
+      </tr>
+      <tr> 
+        <td valign="top">datClose</td>
+        <td valign="top">Date/Time</td>
+        <td valign="top">Short Date</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Closing date of the purchase, not the project</td>
+      </tr>
+      <tr> 
+          <td valign="top"><font color="#0000FF">intInterestType</font></td>
+          <td valign="top">Number</td>
+          <td valign="top">Long Integer</td>
+        <td valign="top">1</td>
+          <td valign="top">Foreign key; from tblInterestSold</td>
+      </tr>
+      <tr> 
+        <td valign="top">strRollNumber</td>
+        <td valign="top">Text</td>
+        <td valign="top">30</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+          <td valign="top">strAcquiredFrom</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strPropertyUse</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">memPropDescription</td>
+        <td valign="top">Memo</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Property description</td>
+      </tr>
+    </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblAgent"></a>tblAgent</b></p>
+      <ul>
+        <li>tblAgent contains all the information about the agents/users.</li>
+        <li>records entered and updated by users with admin access only (except 
+          for strPassword which can be edited for the user currently logged in)</li>
+      </ul>
+	<br>
+      
+    <table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAbrev</td>
+        <td valign="top">Text</td>
+          <td valign="top">3</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Advisors initials</td>
+      </tr>
+      <tr> 
+        <td valign="top">strLastName</td>
+        <td valign="top">Text</td>
+        <td valign="top">30</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strFirstName</td>
+        <td valign="top">Text</td>
+        <td valign="top">30</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strPassword</td>
+        <td valign="top">Text</td>
+        <td valign="top">15</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intAgentID</font></td>
+        <td valign="top"><font color="#FF0000">AutoNumber</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr>
+        <td valign="top"><font color="#0000FF">intAccessLevel</font></td>
+        <td valign="top">Number</td>
+        <td valign="top">Byte</td>
+        <td valign="top">3</td>
+          <td valign="top">Foreign key; from tblAccessLevel</td>
+      </tr>
+      <tr> 
+        <td valign="top">datLastVisit</td>
+        <td valign="top">Date/Time</td>
+        <td valign="top">Short Date</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Date of the Advisor's last use of application</td>
+      </tr>
+    </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblAppraisals"></a>tblAppraisals</b></p>
+      <ul>
+        <li>tblAppraisals is used to store apppraisal information for acquisition 
+          projects.</li>
+        <li>records entered and updated by users with write or admin access</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intApprID</font></td>
+        <td valign="top"><font color="#FF0000">AutoNumber</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr>
+        <td valign="top">datApprDate</td>
+        <td valign="top">Date/Time</td>
+        <td valign="top">Short Date</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Date of appraisal</td>
+      </tr>
+      <tr> 
+        <td valign="top">curApprAmount</td>
+        <td valign="top">Currency</td>
+        <td valign="top">Currency</td>
+        <td valign="top">0</td>
+          <td valign="top">Appraised value</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAppraisalNo</td>
+        <td valign="top">Text</td>
+        <td valign="top">40</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Appraisal number</td>
+      </tr>
+      <tr> 
+          <td valign="top"><font color="#0000FF">intProjectID</font></td>
+          <td valign="top">Number</td>
+          <td valign="top">Long Integer</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Foreign key; from tblAcquisitions</td>
+      </tr>
+      <tr> 
+        <td valign="top">strApprName</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">name of the appraiser</td>
+      </tr>
+    </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblBand"></a>tblBand</b></p>
+      <ul>
+        <li>tblBand is used to store information about the First Nations Bands 
+          that have been consulted concerning property disposals. Band records 
+          are specific to a project so that if band information needs to be changed 
+          for a current project, it will not affect completed projects.</li>
+        <li>records entered and updated by users with write or admin access, records 
+          cannot be deleted by users</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intBandID</font></td>
+        <td valign="top"><font color="#FF0000">AutoNumber</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr> 
+          <td valign="top"><font color="#0000FF">intProjectID</font></td>
+          <td valign="top">Number</td>
+          <td valign="top">Long Integer</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Foreign key; from tblDisposals - </td>
+      </tr>
+      <tr> 
+        <td valign="top">strBandName</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strChiefName</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strContact</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Contact name</td>
+      </tr>
+      <tr>
+        <td valign="top">strPhone</td>
+        <td valign="top">Text</td>
+        <td valign="top">15</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strFax</td>
+        <td valign="top">Text</td>
+        <td valign="top">15</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAddress</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strEmail</td>
+        <td valign="top">Text</td>
+        <td valign="top">70</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+    </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblClientContact"></a>tblClientContact</b></p>
+      <ul>
+        <li>tblClientContact is a look up table for Client Contacts.</li>
+        <li>records entered and updated by users with write or admin access</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intClientContactID</font></td>
+        <td valign="top"><font color="#FF0000">AutoNumber</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr>
+        <td valign="top">strFirstName</td>
+        <td valign="top">Text</td>
+        <td valign="top">30</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strLastName</td>
+        <td valign="top">Text</td>
+        <td valign="top">30</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strArea</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Used for Small Craft Harbour's Area Chiefs</td>
+      </tr>
+      <tr> 
+        <td valign="top">bolActive</td>
+        <td valign="top">Yes/No</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">Yes</td>
+          <td valign="top">if bolActive is &quot;No&quot;, users will be unable 
+            to select that record when creating a new project</td>
+      </tr>
+    </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblDept"></a>tblDept</b></p>
+      <ul>
+        <li>tblDept is a look-up table for Client Departments.</li>
+        <li>records entered and updated by users with write or admin access</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intDeptID</font></td>
+        <td valign="top"><font color="#FF0000">AutoNumber</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr> 
+        <td valign="top">strDeptAbrev</td>
+        <td valign="top">Text</td>
+        <td valign="top">12</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Department abbreviation</td>
+      </tr>
+      <tr> 
+        <td valign="top">strDeptName</td>
+        <td valign="top">Text</td>
+        <td valign="top">75</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">bolActive</td>
+        <td valign="top">Yes/No</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">Yes</td>
+          <td valign="top">if bolActive is &quot;No&quot;, users will be unable 
+            to select that record when creating a new project</td>
+      </tr>
+    </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblDisposalMethod"></a>tblDisposalMethod</b></p>
+      <ul>
+        <li>tblDisposalMethod is a look-up table for disposal methods.</li>
+        <li>records entered and updated by users with admin access</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intDisposalMethodID</font></td>
+        <td valign="top"><font color="#FF0000">AutoNumber</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr> 
+        <td valign="top">strDisposalMethod</td>
+        <td valign="top">Text</td>
+        <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+      
+	<p><b><a name="tblDisposals"></a>tblDisposals</b></p>
+      <ul>
+        <li>tblDisposals holds all the data that is specific to disposal projects.</li>
+        <li>records entered and updated by users with write or admin access</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intProjectID</font></td>
+        <td valign="top"><font color="#FF0000">Number</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr> 
+        <td valign="top">strRollNumber</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strProjRefNo</td>
+        <td valign="top">Text</td>
+        <td valign="top">8</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Project Reference Number from Real Estate Online</td>
+      </tr>
+      <tr> 
+        <td valign="top">strLDU</td>
+        <td valign="top">Text</td>
+        <td valign="top">5</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">DFRP number</td>
+      </tr>
+      <tr> 
+        <td valign="top">strPACNo</td>
+        <td valign="top">Text</td>
+        <td valign="top">5</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strSMANo</td>
+        <td valign="top">Text</td>
+        <td valign="top">6</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">datReportOfSurplus</td>
+        <td valign="top">Date/Time</td>
+        <td valign="top">Short Date</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Date of Report of Surplus</td>
+      </tr>
+      <tr> 
+          <td valign="top"><font color="#0000FF">intDisposalMethod</font></td>
+          <td valign="top">Number</td>
+          <td valign="top">Long Integer</td>
+        <td valign="top">1</td>
+          <td valign="top">Foreign key; from tblDispsalMethod</td>
+      </tr>
+      <tr> 
+          <td valign="top"><font color="#0000FF">intPropertyTypeID</font></td>
+          <td valign="top">Number</td>
+          <td valign="top">Long Integer</td>
+        <td valign="top">1</td>
+          <td valign="top">Foreign key; from tblPropertyType</td>
+      </tr>
+      <tr>
+          <td valign="top"><font color="#0000FF">intPurchaserTypeID</font></td>
+          <td valign="top">Number</td>
+          <td valign="top">Long Integer</td>
+        <td valign="top">1</td>
+          <td valign="top">Foreign key; from tblPurchaserType</td>
+      </tr>
+      <tr> 
+          <td valign="top"><font color="#0000FF">intInterestSoldID</font></td>
+          <td valign="top">Number</td>
+          <td valign="top">Long Integer</td>
+        <td valign="top">1</td>
+          <td valign="top">Foreign key; from tblInterestSold</td>
+      </tr>
+    </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblDispSummary"></a>tblDispSummary</b></p>
+      <ul>
+        <li>tblDispSummary is used to store the values that appear on the Summary 
+          of Property Disposal form. This table is used to provide flexibility 
+          to the users in the way that they fill out the form, as opposed to taking 
+          all the data directly out of tblProjects and tblDisposals.</li>
+        <li>records entered and updated by all users</li>
+      </ul>
+	<br>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intProjectID</font></td>
+        <td valign="top"><font color="#FF0000">Number</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+          <td valign="top">links to tblDisposals.intProjectID 
+            to create a one-to-one relationship</td>
+      </tr>
+      <tr> 
+        <td valign="top">bolSaved</td>
+        <td valign="top">Yes/No</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">No</td>
+          <td valign="top">indicates whether the form on disposalSummary.cfm should 
+            take data from this table or from tblDisposals and tblProjects</td>
+      </tr>
+      <tr> 
+        <td valign="top">strLocation</td>
+        <td valign="top">Text</td>
+        <td valign="top">70</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Property location</td>
+      </tr>
+      <tr> 
+        <td valign="top">strDescription</td>
+        <td valign="top">Text</td>
+        <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Project description</td>
+      </tr>
+      <tr> 
+        <td valign="top">strLegal</td>
+        <td valign="top">Text</td>
+        <td valign="top">150</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Legal description</td>
+      </tr>
+      <tr> 
+        <td valign="top">strCustodian</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Custodian department of property</td>
+      </tr>
+      <tr> 
+        <td valign="top">strPurchaser</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strSalePrice</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAppraisedValue</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strCompletionDate</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Date of completion of sale</td>
+      </tr>
+      <tr>
+        <td valign="top">strAgent</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Advisor for project</td>
+      </tr>
+      <tr> 
+        <td valign="top">strFileNo</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strProjectNumber</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strRollNumber</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">memRemarks</td>
+        <td valign="top">Memo</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+    </table>
+    <p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblFactSheet"></a>tblFactSheet</b></p>
+      <ul>
+        <li>tblFactSheet is used to store the data that appears on the Fact Sheet 
+          for disposal projects.</li>
+        <li>records entered and updated by users with write or admin access</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intProjectID</font></td>
+        <td valign="top"><font color="#FF0000">Number</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr> 
+        <td valign="top">strGeneralDesc</td>
+        <td valign="top">Text</td>
+          <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAvailable</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Not a date field because it must be more flexible</td>
+      </tr>
+      <tr> 
+        <td valign="top">strUrbanCentre</td>
+        <td valign="top">Text</td>
+        <td valign="top">70</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAddress</td>
+        <td valign="top">Text</td>
+          <td valign="top">100</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">sngParcelSize</td>
+        <td valign="top">Text</td>
+        <td valign="top">Single</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strTopography</td>
+        <td valign="top">Text</td>
+          <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAccess</td>
+        <td valign="top">Text</td>
+          <td valign="top">100</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strBuildingDesc</td>
+        <td valign="top">Text</td>
+          <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strZoning</td>
+        <td valign="top">Text</td>
+          <td valign="top">100</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strServices</td>
+        <td valign="top">Text</td>
+          <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strLandUse</td>
+        <td valign="top">Text</td>
+          <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">intAge</td>
+        <td valign="top">Number</td>
+        <td valign="top">Integer</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strCondition</td>
+        <td valign="top">Text</td>
+          <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strEnvironIssues</td>
+        <td valign="top">Text</td>
+        <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strTenure</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strRestrictions</td>
+        <td valign="top">Text</td>
+          <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAcquiDate</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Not a date field because it must be more flexible</td>
+      </tr>
+      <tr> 
+        <td valign="top">strPurchasedFrom</td>
+        <td valign="top">Text</td>
+          <td valign="top">70</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">curAmountPaid</td>
+        <td valign="top">Currency</td>
+        <td valign="top">Currency</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strHistory</td>
+        <td valign="top">Text</td>
+          <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strKnownInterests</td>
+        <td valign="top">Text</td>
+          <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+        <td valign="top">curLandAsses</td>
+        <td valign="top">Currency</td>
+        <td valign="top">Currency</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">curBuildingAsses</td>
+        <td valign="top">Currency</td>
+        <td valign="top">Currency</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">intYear</td>
+        <td valign="top">Number</td>
+        <td valign="top">Integer</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">curPILT</td>
+        <td valign="top">Currency</td>
+        <td valign="top">Currency</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+    </table>
+    <p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+	
+	<p><b><a name="tblFirstNationsRemarks"></a>tblFirstNationsRemarks</b></p>
+      <ul>
+        <li>tblFirstNationsRemarks contains remarks about First Nations consultations 
+          concerning property disposals.</li>
+        <li>records entered and updated by users with write or admin access</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intUpdateID</font></td>
+        <td valign="top"><font color="#FF0000">AutoNumber</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr> 
+        <td valign="top">datDate</td>
+        <td valign="top">Date/Time</td>
+        <td valign="top">Short Date</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">memRemark</td>
+        <td valign="top">Memo</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+          <td valign="top"><font color="#0000FF">intBandID</font></td>
+        <td valign="top">Number</td>
+        <td valign="top">Long Integer</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Foreign key; from tblBand</td>
+      </tr>
+      <tr> 
+          <td valign="top"><font color="#0000FF">intAgentID</font></td>
+        <td valign="top">Number</td>
+        <td valign="top">Long Integer</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Foreign key; from tblAgent</td>
+      </tr>
+    </table>
+    <p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblInterestSold"></a>tblInterestSold</b></p>
+      <ul>
+        <li>tblInterestSold is a look-up table for interest sold types in disposals 
+          and interest acquired types in acquisitions.</li>
+        <li>records entered and updated by users with admin access only</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intInterestSoldID</font></td>
+        <td valign="top"><font color="#FF0000">AutoNumber</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr> 
+        <td valign="top">strInterestSold</td>
+        <td valign="top">Text</td>
+        <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblLocation"></a>tblLocation</b></p>
+      <ul>
+        <li>tblLocation is a look-up table for locations.</li>
+        <li>records entered and updated by users with write or admin access</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intLocationID</font></td>
+        <td valign="top"><font color="#FF0000">AutoNumber</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr>
+        <td valign="top">strLocation</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Location name</td>
+      </tr>
+      <tr> 
+        <td valign="top">bolActive</td>
+        <td valign="top">Yes/No</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">Yes</td>
+          <td valign="top">If bolActive is &quot;No&quot;, users will be unable 
+            to select that record when creating a new project</td>
+      </tr>
+    </table>  
+    <p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblPINPID"></a>tblPINPID</b></p>
+      <ul>
+        <li>tblPINPID stores PIN/PID values for acquisitions and disposals. In 
+          the future this value may be used to look up survey plan information.</li>
+        <li>records entered and updated by users with write or admin access</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr>
+          <td valign="top"><font color="#0000FF">intProjectID</font></td>
+        <td valign="top">Number</td>
+        <td valign="top">Long Integer</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Foreign key; from tblProjects</td>
+      </tr>
+      <tr> 
+          <td valign="top"><font color="#FF0000">strPINPID</font></td>
+          <td valign="top"><font color="#FF0000">Text</font></td>
+          <td valign="top"><font color="#FF0000">9</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr> 
+        <td valign="top">bolIsPID</td>
+        <td valign="top">Yes/No</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">If bolISPID is &quot;Yes&quot; then it is a PID, otherwise 
+            it is a PIN</td>
+      </tr>
+    </table>
+    <p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblProjects"></a>tblProjects</b></p>
+      <ul>
+        <li>tblProjects is the main table in the database. It stores all the information 
+          that is common to acquisitions, disposals and consulting projects, and 
+          has a field, intProjectType, which identifies what type of project it 
+          is.</li>
+        <li>records entered and updated by users with write or admin access (records 
+          can only be deleted by admin users)</li>
+      </ul>
+	<br>
+      
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="150"> <img src="transparent.gif" width="148" height="1"><br>
+            <b>Field Name</b> </td>
+          <td width="100"> <img src="transparent.gif" width="100" height="1"><br>
+            <b>Data Type</b> </td>
+          <td width="100"> <img src="transparent.gif" width="100" height="1"><br>
+            <b>Size</b> (format) </td>
+          <td width="100"> <img src="transparent.gif" width="100" height="1"><br>
+            <b>Default Value</b> </td>
+          <td width="250"> <img src="transparent.gif" width="250" height="1"><br>
+            <b>Comments</b> </td>
+        </tr>
+        <tr> 
+          <td valign="top"><font color="#0000FF">intAgent</font></td>
+          <td valign="top">Number</td>
+          <td valign="top">Long Integer</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">Foreign key; from tblAgent</td>
+        </tr>
+        <tr> 
+          <td valign="top"><font color="#FF0000">intProjectID</font></td>
+          <td valign="top"><font color="#FF0000">AutoNumber</font></td>
+          <td valign="top"><font color="#FF0000">Long Integer</font></td>
+          <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+          <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        </tr>
+        <tr> 
+          <td valign="top">intProjectNo</td>
+          <td valign="top">Number</td>
+          <td valign="top">Long Integer</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><font color="#0000FF">intProvID</font></td>
+          <td valign="top">Number</td>
+          <td valign="top">Byte</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">Foreign key; from tblProvince</td>
+        </tr>
+        <tr> 
+          <td valign="top">strDescription</td>
+          <td valign="top">Text</td>
+          <td valign="top">255</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">strLegal</td>
+          <td valign="top">Text</td>
+          <td valign="top">255</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><font color="#0000FF">intClientDept</font></td>
+          <td valign="top">Number</td>
+          <td valign="top">Long Integer</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">Foreign key; from tblDept</td>
+        </tr>
+        <tr> 
+          <td valign="top">intSecondDept</td>
+          <td valign="top">Number</td>
+          <td valign="top">Long Integer</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">Very rarely used, looks up values from tblDept</td>
+        </tr>
+        <tr> 
+          <td valign="top">strFileNo</td>
+          <td valign="top">Text</td>
+          <td valign="top">16</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">datStartDate</td>
+          <td valign="top">Date/Time</td>
+          <td valign="top">Short Date</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">datComplDate</td>
+          <td valign="top">Date/Time</td>
+          <td valign="top">Short Date</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">Project completion date</td>
+        </tr>
+        <tr> 
+          <td valign="top">bolCancelled</td>
+          <td valign="top">Yes/No</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">curSSAFees</td>
+          <td valign="top">Currency</td>
+          <td valign="top">Currency</td>
+          <td valign="top">0</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">curSSADisbursements</td>
+          <td valign="top">Currency</td>
+          <td valign="top">Currency</td>
+          <td valign="top">0</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top"><font color="#0000FF">intProjectType</font></td>
+          <td valign="top">Number</td>
+          <td valign="top">Byte</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">Foreign key; from tblProjectType</td>
+        </tr>
+        <tr> 
+          <td valign="top"><font color="#0000FF">intClientContactID</font></td>
+          <td valign="top">Number</td>
+          <td valign="top">Long Integer</td>
+          <td valign="top">1</td>
+          <td valign="top">Foreign key; from tblClientContact</td>
+        </tr>
+        <tr> 
+          <td valign="top"><font color="#0000FF">intLocationID</font></td>
+          <td valign="top">Number</td>
+          <td valign="top">Long Integer</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">Foreign key; from tblLocation</td>
+        </tr>
+        <tr> 
+          <td valign="top">curPrice</td>
+          <td valign="top">Currency</td>
+          <td valign="top">Currency</td>
+          <td valign="top">0</td>
+          <td valign="top">Sale price</td>
+        </tr>
+        <tr>
+          <td valign="top">curExpToDate</td>
+          <td valign="top">Currency</td>
+          <td valign="top">Currency</td>
+          <td valign="top">0</td>
+          <td valign="top">Expenditures to date</td>
+        </tr>
+        <tr> 
+          <td valign="top">strExtraField1</td>
+          <td valign="top">Text</td>
+          <td valign="top">255</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">Extra field that can be used in future</td>
+        </tr>
+        <tr> 
+          <td valign="top">strExtraField2</td>
+          <td valign="top">Text</td>
+          <td valign="top">255</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">Extra field that can be used in future</td>
+        </tr>
+      </table>
+    <p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblProjectType"></a>tblProjectType</b></p>
+      <ul>
+        <li>tblProjectType is a look-up table for the project type of each project.</li>
+        <li>records in this table should not change</li>
+      </ul>
+	<br>
+       
+    
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intProjTypeID</font></td>
+        <td valign="top"><font color="#FF0000">Number</font></td>
+        <td valign="top"><font color="#FF0000">Byte</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+          <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr>
+        <td valign="top">strProjType</td>
+        <td valign="top">Text</td>
+        <td valign="top">20</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+    </table>
+    <p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblPropertyType"></a>tblPropertyType</b></p>
+      <ul>
+        <li>tblPropertyType is a look-up table for the property type of disposal 
+          projects.</li>
+        <li>records entered and updated by users with admin access only</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intPropertyTypeID</font></td>
+        <td valign="top"><font color="#FF0000">AutoNumber</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr> 
+        <td valign="top">strPropertyType</td>
+        <td valign="top">Text</td>
+        <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+    </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblProvince"></a>tblProvince</b></p>
+      <ul>
+        <li>tblProvince is a look-up table for provinces.</li>
+        <li>records in this table should not change</li>
+      </ul>
+	<br>
+      
+    <table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intProvID</font></td>
+        <td valign="top"><font color="#FF0000">Number</font></td>
+        <td valign="top"><font color="#FF0000">Byte</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+          <td valign="top">Province code is that used in DFRP</td>
+      </tr>
+      <tr> 
+        <td valign="top">strAbbreviated</td>
+        <td valign="top">Text</td>
+        <td valign="top">2</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td valign="top">strProvNm</td>
+        <td valign="top">Text</td>
+        <td valign="top">50</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+    </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+	
+	<p><b><a name="tblPurchaserType"></a>tblPurchaserType</b></p>
+      <ul>
+        <li>tblPurchaserType is a look-up table for the purchaser type of disposal 
+          projects.</li>
+        <li>records entered and updated by users with admin access only</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intPurchaserTypeID</font></td>
+        <td valign="top"><font color="#FF0000">AutoNumber</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr> 
+        <td valign="top">strPurchaserType</td>
+        <td valign="top">Text</td>
+        <td valign="top">255</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+    </table>
+    <p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+    
+	<p><b><a name="tblStatus"></a>tblStatus</b></p>
+      <ul>
+        <li>tblStatus contains the status memos that are written for each project.</li>
+        <li>records entered and updated by users with write or admin access</li>
+      </ul>
+	<br>
+      
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="150">
+			<img src="transparent.gif" width="148" height="1"><br>
+			<b>Field Name</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Data Type</b>
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Size</b> (format)
+		</td>
+        <td width="100">
+			<img src="transparent.gif" width="100" height="1"><br>
+			<b>Default Value</b>
+		</td>
+        <td width="250">
+			<img src="transparent.gif" width="250" height="1"><br>
+			<b>Comments</b>
+		</td>
+      </tr>
+      <tr> 
+        <td valign="top"><font color="#FF0000">intStatusID</font></td>
+        <td valign="top"><font color="#FF0000">AutoNumber</font></td>
+        <td valign="top"><font color="#FF0000">Long Integer</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+        <td valign="top"><font color="#FF0000">&nbsp;</font></td>
+      </tr>
+      <tr> 
+          <td valign="top"><font color="#0000FF">intProjectID</font></td>
+        <td valign="top">Number</td>
+        <td valign="top">Long Integer</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Foreign key; from tblProjects</td>
+      </tr>
+      <tr>
+        <td valign="top">memStatus</td>
+        <td valign="top">Memo</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Project status</td>
+      </tr>
+      <tr> 
+        <td valign="top">datUpdate</td>
+        <td valign="top">Date/Time</td>
+        <td valign="top">Short Date</td>
+        <td valign="top">&nbsp;</td>
+          <td valign="top">Date of status update</td>
+      </tr>
+    </table>
+    <p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#tableDefinitions">Top of Table Definitions</a></p>
+</td>
+</tr>
+</table>
+
+<hr><br>
+
+<table border="0" cellpadding="0" cellspacing="0" width="755">
+<tr>
+<td width="30"><img src="transparent.gif" width="30" height="1"></td>
+<td> 
+      <p><b><font size="4"><a name="relationships"></a>Relationships and Referential 
+        Integrity (RI)</font></b></p>
+   
+    <p><a href="database.html#relAccessLevel">tblAccessLevel</a><br>
+      <a href="database.html#relAcqSummary">tblAcqSummary</a><br>
+      <a href="database.html#relAcquisitions">tblAcquisitions</a><br>
+      <a href="database.html#relAgent">tblAgent</a><br>
+      <a href="database.html#relAppraisals">tblAppraisals</a><br>
+      <a href="database.html#relBand">tblBand</a><br>
+      <a href="database.html#relClientContact">tblClientContact</a><br>
+      <a href="database.html#relDept">tblDept</a><br>
+      <a href="database.html#relDisposalMethod">tblDisposalMethod</a><br>
+      <a href="database.html#relDisposals">tblDisposals</a><br>
+      <a href="database.html#relDispSummary">tblDispSummary</a><br>
+      <a href="database.html#relFactSheet">tblFactSheet</a><br>
+      <a href="database.html#relFirstNationsRemarks">tblFirstNationsRemarks</a><br>
+      <a href="database.html#relInterestSold">tblInterestSold</a><br>
+	  <a href="database.html#relLocation">tblLocation</a><br>
+      <a href="database.html#relPINPID">tblPINPID</a><br>
+      <a href="database.html#relProjects">tblProjects</a><br>
+      <a href="database.html#relProjectType">tblProjectType</a><br>
+      <a href="database.html#relPropertyType">tblPropertyType</a><br>
+      <a href="database.html#relProvince">tblProvince</a><br>
+      <a href="database.html#relPurchaserType">tblPurchaserType</a><br>
+      <a href="database.html#relStatus">tblStatus</a><br></p>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html">Top</a></p>
+	  <p>Note: In each relationship there is a primary table and a secondary table. 
+        If the table being described is the primary table, in a relationship, 
+        it will be a &quot;has&quot; relationship and &quot;Enforce RI?&quot; 
+        and &quot;Cascade Delete?&quot; will be indicated. Otherwise it will be 
+        a &quot;looks up&quot; or &quot;belongs to&quot; relationship and &quot;Enforce 
+        RI?&quot; and &quot;Cascade Delete?&quot; will not be indicated. For example, 
+        &quot;one Agent has many Projects&quot; indicates that tblAgent is the 
+        primary table in the relationship so &quot;Enforce RI?&quot; and &quot;Cascade 
+        Delete&quot; will be indicated. The corresponding relationship, &quot;one 
+        Project looks up one Agent&quot;, will leave the columns for &quot;Enforce 
+        RI?&quot; and &quot;Cascade Delete&quot; blank. </p>
+	<p>
+      <b><a name="relAccessLevel"></a>tblAccessLevel</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one AccessLevel has many Agents</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relAcqSummary"></a>tblAcqSummary</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one AcqSummary belongs to one Acquisition</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relAcquisitions"></a>tblAcquisitions</b><br></p>
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="350"><b>Relationship</b></td>
+          <td width="100"><b>Enforce RI?</b></td>
+          <td width="120"><b>Cascade Delete?</b></td>
+        </tr>
+        <tr>
+          <td valign="top">one Acquisition belongs to one Project</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Acquisition has one AcqSummary</td>
+          <td valign="top">Yes</td>
+          <td valign="top">Yes</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Acquisition has many Appraisals</td>
+          <td valign="top">Yes</td>
+          <td valign="top">Yes</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Acquisition looks up one InterestSold</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+      </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relAgent"></a>tblAgent</b><br></p>
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="350"><b>Relationship</b></td>
+          <td width="100"><b>Enforce RI?</b></td>
+          <td width="120"><b>Cascade Delete?</b></td>
+        </tr>
+        <tr>
+          <td valign="top">one Agent has many Projects</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Agent has many FirstNationsRemarks</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Agent looks up one AccessLevel</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+      </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relAppraisals"></a>tblAppraisals</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one Appraisal belongs to one Acquisition</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relBand"></a>tblBand</b><br></p>
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="350"><b>Relationship</b></td>
+          <td width="100"><b>Enforce RI?</b></td>
+          <td width="120"><b>Cascade Delete?</b></td>
+        </tr>
+        <tr>
+          <td valign="top">one Band has many FirstNationsRemarks</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Band belongs to one Disposal</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+      </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relClientContact"></a>tblClientContact</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one ClientContact has many Projects</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relDept"></a>tblDept</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one Dept has many Projects</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relDisposalMethod"></a>tblDisposalMethod</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one DisposalMethod has many Disposals</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relDisposals"></a>tblDisposals</b><br></p>
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="350"><b>Relationship</b></td>
+          <td width="100"><b>Enforce RI?</b></td>
+          <td width="120"><b>Cascade Delete?</b></td>
+        </tr>
+        <tr>
+          <td valign="top">one Disposal has many Bands</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Disposal has one FactSheet</td>
+          <td valign="top">Yes</td>
+          <td valign="top">Yes</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Disposal has one DispSummary</td>
+          <td valign="top">Yes</td>
+          <td valign="top">Yes</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Disposal belongs to one Project</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Disposal looks up one DisposalMethod</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Disposal looks up one PropertyType</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Disposal looks up one PurchaserType</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Disposal looks up one InterestSold</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+      </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relDispSummary"></a>tblDispSummary</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one DispSummary belongs to one Disposal</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relFactSheet"></a>tblFactSheet</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one FactSheet belongs to one Disposal</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relFirstNationsRemarks"></a>tblFirstNationsRemarks</b><br></p>
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="350"><b>Relationship</b></td>
+          <td width="100"><b>Enforce RI?</b></td>
+          <td width="120"><b>Cascade Delete?</b></td>
+        </tr>
+        <tr>
+          <td valign="top">one FirstNationsRemark belongs to one Band</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">one FirstNationsRemark looks up one Agent</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+      </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relInterestSold"></a>tblInterestSold</b><br></p>
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="350"><b>Relationship</b></td>
+          <td width="100"><b>Enforce RI?</b></td>
+          <td width="120"><b>Cascade Delete?</b></td>
+        </tr>
+        <tr>
+          <td valign="top">one InterestSold has many Disposals</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+        </tr>
+        <tr> 
+          <td valign="top">one InterestSold has many Acquisitions</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+        </tr>
+      </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relLocation"></a>tblLocation</b><br></p>
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="350"><b>Relationship</b></td>
+          <td width="100"><b>Enforce RI?</b></td>
+          <td width="120"><b>Cascade Delete?</b></td>
+        </tr>
+        <tr>
+          <td valign="top">one Location has many Projects</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+        </tr>
+      </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relPINPID"></a>tblPINPID</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one PINPID belongs to one Project</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relProjects"></a>tblProjects</b><br></p>
+	  <table border="1" cellpadding="1" cellspacing="0">
+        <tr bgcolor="#FFFFCC"> 
+          <td width="350"><b>Relationship</b></td>
+          <td width="100"><b>Enforce RI?</b></td>
+          <td width="120"><b>Cascade Delete?</b></td>
+        </tr>
+        <tr>
+          <td valign="top">one Project has one Acquisition</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Project has one Disposal</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Project has many Status's</td>
+          <td valign="top">Yes</td>
+          <td valign="top">Yes</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Project has many PINPID's</td>
+          <td valign="top">Yes</td>
+          <td valign="top">Yes</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Project looks up one Agent</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Project looks up one Dept</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Project looks up one ProjectType</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Project looks up one ClientContact</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td valign="top">one Project looks up one Location</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+		<tr> 
+          <td valign="top">one Project looks up one Province</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+      </table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relProjectType"></a>tblProjectType</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one ProjectType has many Projects</td>  <td valign="top">Yes</td>  <td valign="top">No</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relPropertyType"></a>tblPropertyType</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one PropertyType has many Disposals</td>  <td valign="top">Yes</td>  <td valign="top">No</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relProvince"></a>tblProvince</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one Province has many Projects</td>
+          <td valign="top">Yes</td>  <td valign="top">No</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relPurchaserType"></a>tblPurchaserType</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one PurchaserType has many Disposals</td>
+          <td valign="top">Yes</td>
+          <td valign="top">No</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+	<p>
+      <b><a name="relStatus"></a>tblStatus</b><br></p>
+	<table border="1" cellpadding="1" cellspacing="0">
+      <tr bgcolor="#FFFFCC"> 
+        <td width="350"><b>Relationship</b></td>
+        <td width="100"><b>Enforce RI?</b></td>
+        <td width="120"><b>Cascade Delete?</b></td>
+      </tr>
+      <tr> 
+          <td valign="top">one Status belongs to one Project</td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+	</table>
+	<p align="right"><a href="index.html">Return to Index</a> | <a href="database.html#relationships">Top of Relationships</a></p>
+	
+</td>
+</tr>
+</table><br>
+<hr><br>
+
+<table border="0" cellpadding="0" cellspacing="0" width="755">
+<tr>
+<td width="30"><img src="transparent.gif" width="30" height="1"></td>
+<td> 
+	<p><b><font size="4"><a name="queries"></a>Stored Queries</font></b></p>
+	
+	<p><b>qryMaxUpdate</b><br>
+        qryMaxUpdate returns a list of projectID's and the date of the most recent 
+        status update for each projectID. This query is used by qryMostRecentStatus.</p>
+	  
+	  <table border="0" cellpadding="2" cellspacing="0">
+	  	<tr>
+			<td width="100" valign="top">SELECT</td>
+			<td>
+				 tblStatus.intProjectID,<br>
+				 Max(tblStatus.datUpdate) AS MaxOfdatUpdate
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">FROM</td>
+			<td>tblStatus</td>
+		</tr>
+		<tr>
+			<td valign="top">GROUP BY</td>
+			<td>tblStatus.intProjectID;</td>
+		</tr>
+	  </table>
+	  <br><br>
+      <p><b>qryMostRecentStatus</b><br>
+        qryMostRecentStatus uses qryMaxUpdate to return a list of projectID's 
+        and the date and status of the most recent status update for each projectID. 
+        This query is used in <a href="fileDescriptions.html#generalReport">generalReport.cfm</a>, 
+        <a href="fileDescriptions.html#SCHReport">SCHReport.cfm</a> and <a href="fileDescriptions.html#projectSummaryReport">projectSummaryReport.cfm</a>.</p>
+	  
+	  <table border="0" cellpadding="2" cellspacing="0">
+	  	<tr>
+			<td width="100" valign="top">SELECT</td>
+			<td>
+				 qryMaxUpdate.intProjectID,<br>
+				 Last(tblStatus.memStatus) AS LastOfmemStatus,<br>
+				 Last(tblStatus.datUpdate) AS LastOfdatUpdate
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">FROM</td>
+			<td>tblStatus INNER JOIN qryMaxUpdate</td>
+		</tr>
+		<tr>
+			<td valign="top">ON</td>
+			<td>(tblStatus.intProjectID = qryMaxUpdate.intProjectID)</td>
+		</tr>
+		<tr>
+			<td valign="top">AND</td>
+			<td>(tblStatus.datUpdate = qryMaxUpdate.MaxOfdatUpdate)</td>
+		</tr>
+		<tr>
+			<td valign="top">GROUP BY</td>
+			<td>qryMaxUpdate.intProjectID;</td>
+		</tr>
+	  </table>
+	  <p align="right"><a href="index.html">Return to Index</a> | <a href="database.html">Top</a></p>
+</td>
+</tr>
+</table><br><br>
+</body>
+</html>

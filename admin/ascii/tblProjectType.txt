@@ -1,0 +1,4 @@
+"intProjTypeID","strProjType"
+1,"Acquisition"
+2,"Disposal"
+3,"Consulting"

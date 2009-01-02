@@ -1,0 +1,9 @@
+A.link:link {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9pt; color: #0066CC; text-decoration: underline;}
+A.link:visited {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9pt; color: #0066CC; text-decoration: underline;}
+A.link:hover {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9pt; color: #ff9900; text-decoration: underline;}
+A.link:active {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9pt; color: #ff9900; text-decoration: underline;}
+
+BODY {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9pt;}
+P {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9pt;}
+TABLE, TR, TD {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9pt;}
+H2 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16pt; font-weight: bold;}
