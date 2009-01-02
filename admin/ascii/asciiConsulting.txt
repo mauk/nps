@@ -1,2 +1,0 @@
-"intProjectID","intProjectNo","strDescription","strFileNo","datStartDate","datComplDate","bolCancelled","curSSAFees","curSSADisbursements","curExpToDate","strAgentFirstName","strAgentLastName","strLocation","strProvAbrev","strDeptAbrev","strClientContactFirst","strClientContactLast"
-539,1234567,"","",7/10/2002,,0,5.0000,6.0000,.0000,"JOE","GORMLEY","BOWEN ISLAND","BC","DFO","Mike","Doutaz"
