@@ -433,9 +433,9 @@ them directly here, without performing a search) so they must perform a new sear
 	AND		tblProjects.intClientDept = tblDept.intDeptID
 	AND		tblProjects.intClientContactID = tblClientContact.intClientContactID
 <CFIF #Client.status# EQ "active">
-	AND		((tblProjects.datComplDate IS NULL OR tblProjects.datComplDate > #Now()#) AND tblProjects.bolCancelled = False)
+	AND		((tblProjects.datComplDate IS NULL OR tblProjects.datComplDate > #Now()#) AND tblProjects.bolCancelled = 0)
 <CFELSEIF #Client.status# EQ "complete">
-	AND		(tblProjects.datComplDate < #Now()# OR tblProjects.bolCancelled = True)
+	AND		(tblProjects.datComplDate < #Now()# OR tblProjects.bolCancelled = 1)
 </CFIF>
 <CFIF #Client.projectType# EQ "acquisition">
 	AND		tblProjectType.intProjTypeID = 1
