@@ -122,6 +122,9 @@ Only client contacts who are actually contacts for projects are displayed --->
 						<OPTION VALUE="all">All</OPTION>
 						<OPTION VALUE="active" SELECTED>Active</OPTION>
 						<OPTION VALUE="complete">Completed</OPTION>
+						<OPTION VALUE="onHold">On Hold</OPTION>
+						<OPTION VALUE="cancelled">Cancelled</OPTION>
+						
 					</SELECT>
 				</td>
 			</tr>
