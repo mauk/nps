@@ -436,6 +436,10 @@ them directly here, without performing a search) so they must perform a new sear
 	AND		((tblProjects.datComplDate IS NULL OR tblProjects.datComplDate > #Now()#) AND tblProjects.bolCancelled = 0)
 <CFELSEIF #Client.status# EQ "complete">
 	AND		(tblProjects.datComplDate < #Now()# OR tblProjects.bolCancelled = 1)
+<CFELSEIF #Client.status# EQ "onHold">
+	AND		tblProjects.onHold = 1
+<CFELSEIF #Client.status# EQ "cancelled">
+	AND		tblProjects.bolCancelled = 1
 </CFIF>
 <CFIF #Client.projectType# EQ "acquisition">
 	AND		tblProjectType.intProjTypeID = 1
@@ -443,6 +447,8 @@ them directly here, without performing a search) so they must perform a new sear
 	AND		tblProjectType.intProjTypeID = 2
 <CFELSEIF #Client.projectType# EQ "consulting">
 	AND		tblProjectType.intProjTypeID = 3
+
+	
 </CFIF>
 <!---[ap:locator:051107:u1]--->
 <CFIF #Client.province# NEQ "all">
